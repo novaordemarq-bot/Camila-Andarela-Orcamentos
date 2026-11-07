@@ -1,0 +1,24 @@
+{
+  "name": "Andarela Tur — Orçamentos (Camila)",
+  "short_name": "Andarela Tur",
+  "description": "Gerador Inteligente de Orçamentos em PDF e WhatsApp — Andarela Tur Viagens e Vistos",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#162B4E",
+  "theme_color": "#162B4E",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

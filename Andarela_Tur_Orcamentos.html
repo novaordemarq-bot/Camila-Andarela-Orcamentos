@@ -1,0 +1,2308 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#162B4E" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Andarela Tur" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <title>Andarela Tur — Gerador Inteligente de Orçamentos</title>
+  <meta name="description" content="Sistema oficial de geração de orçamentos em PDF e WhatsApp da Andarela Tur — Viagens e Vistos." />
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="apple-touch-icon" href="./icon-192.png" />
+  <link rel="icon" type="image/png" href="./icon-192.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+
+    /* Standalone CSS Fallback for Offline / Mobile / External Browser Use */
+    html {
+      --background: #F1F5F9;
+      --foreground: #0F172A;
+      --card: #FFFFFF;
+      --border: #CBD5E1;
+      --muted-foreground: #475569;
+      font-size: 16px;
+    }
+    .max-w-7xl { max-width: 80rem; }
+    .max-w-4xl { max-width: 56rem; }
+    .max-w-xl { max-width: 36rem; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+    .px-4 { padding-left: 1rem; padding-right: 1rem; }
+    .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+    .py-5 { padding-top: 1.25rem; padding-bottom: 1.25rem; }
+    .p-4 { padding: 1rem; }
+    .p-5 { padding: 1.25rem; }
+    .p-6 { padding: 1.5rem; }
+    .p-3\.5 { padding: 0.875rem; }
+    .p-3 { padding: 0.75rem; }
+    .p-2\.5 { padding: 0.625rem; }
+    .p-2 { padding: 0.5rem; }
+    .p-1\.5 { padding: 0.375rem; }
+    .p-1 { padding: 0.25rem; }
+    .flex { display: flex; }
+    .inline-block { display: inline-block; }
+    .grid { display: grid; }
+    .hidden { display: none !important; }
+    .block { display: block; }
+    .flex-wrap { flex-wrap: wrap; }
+    .flex-col { flex-direction: column; }
+    .items-center { align-items: center; }
+    .items-start { align-items: flex-start; }
+    .items-baseline { align-items: baseline; }
+    .justify-between { justify-content: space-between; }
+    .justify-center { justify-content: center; }
+    .gap-1 { gap: 0.25rem; }
+    .gap-1\.5 { gap: 0.375rem; }
+    .gap-2 { gap: 0.5rem; }
+    .gap-2\.5 { gap: 0.625rem; }
+    .gap-3 { gap: 0.75rem; }
+    .gap-3\.5 { gap: 0.875rem; }
+    .gap-4 { gap: 1rem; }
+    .gap-6 { gap: 1.5rem; }
+    .space-y-1 > * + * { margin-top: 0.25rem; }
+    .space-y-1\.5 > * + * { margin-top: 0.375rem; }
+    .space-y-2 > * + * { margin-top: 0.5rem; }
+    .space-y-2\.5 > * + * { margin-top: 0.625rem; }
+    .space-y-3 > * + * { margin-top: 0.75rem; }
+    .space-y-3\.5 > * + * { margin-top: 0.875rem; }
+    .space-y-4 > * + * { margin-top: 1rem; }
+    .space-y-5 > * + * { margin-top: 1.25rem; }
+    .space-y-6 > * + * { margin-top: 1.5rem; }
+    .w-full { width: 100%; }
+    .w-auto { width: auto; }
+    .w-16 { width: 4rem; }
+    .w-20 { width: 5rem; }
+    .w-24 { width: 6rem; }
+    .w-28 { width: 7rem; }
+    .w-14 { width: 3.5rem; }
+    .w-10 { width: 2.5rem; }
+    .h-9 { height: 2.25rem; }
+    .h-10 { height: 2.5rem; }
+    .h-12 { height: 3rem; }
+    .rounded { border-radius: 0.25rem; }
+    .rounded-lg { border-radius: 0.5rem; }
+    .rounded-xl { border-radius: 0.75rem; }
+    .rounded-2xl { border-radius: 1rem; }
+    .rounded-full { border-radius: 9999px; }
+    .border { border: 1px solid var(--border); }
+    .border-2 { border-width: 2px; border-style: solid; }
+    .border-b { border-bottom: 1px solid var(--border); }
+    .border-t { border-top: 1px solid var(--border); }
+    .bg-white { background-color: #FFFFFF; }
+    .bg-slate-50 { background-color: #F8FAFC; }
+    .bg-slate-100 { background-color: #F1F5F9; }
+    .bg-emerald-50 { background-color: #ECFDF5; }
+    .bg-emerald-600 { background-color: #059669; }
+    .bg-amber-50 { background-color: #FFFBEB; }
+    .bg-blue-50\/80 { background-color: #EFF6FF; }
+    .bg-\[var\(--background\)\] { background-color: var(--background); }
+    .bg-\[var\(--card\)\] { background-color: var(--card); }
+    .bg-\[\#D91E36\] { background-color: #D91E36; }
+    .bg-\[\#162B4E\] { background-color: #162B4E; }
+    .bg-\[\#0E1D38\] { background-color: #0E1D38; }
+    .bg-\[\#C8321E\] { background-color: #C8321E; }
+    .text-white { color: #FFFFFF; }
+    .text-slate-900 { color: #0F172A; }
+    .text-slate-800 { color: #1E293B; }
+    .text-slate-700 { color: #334155; }
+    .text-slate-600 { color: #475569; }
+    .text-slate-500 { color: #64748B; }
+    .text-slate-300 { color: #CBD5E1; }
+    .text-slate-200 { color: #E2E8F0; }
+    .text-amber-300 { color: #FCD34D; }
+    .text-amber-950 { color: #451A03; }
+    .text-emerald-600 { color: #059669; }
+    .text-emerald-800 { color: #065F46; }
+    .text-red-500 { color: #EF4444; }
+    .text-\[\#162B4E\] { color: #162B4E; }
+    .text-\[\#D91E36\] { color: #D91E36; }
+    .text-\[\#C8321E\] { color: #C8321E; }
+    .text-\[var\(--foreground\)\] { color: var(--foreground); }
+    .text-\[var\(--muted-foreground\)\] { color: var(--muted-foreground); }
+    .text-xs { font-size: 0.75rem; line-height: 1.1rem; }
+    .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+    .text-base { font-size: 1rem; line-height: 1.5rem; }
+    .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+    .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+    .font-medium { font-weight: 500; }
+    .font-semibold { font-weight: 600; }
+    .font-bold { font-weight: 700; }
+    .font-extrabold { font-weight: 800; }
+    .uppercase { text-transform: uppercase; }
+    .tracking-wider { letter-spacing: 0.05em; }
+    .tracking-widest { letter-spacing: 0.1em; }
+    .text-left { text-align: left; }
+    .text-center { text-align: center; }
+    .text-right { text-align: right; }
+    .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05); }
+    .shadow-md { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0,0,0,0.12); }
+    .overflow-hidden { overflow: hidden; }
+    .overflow-x-auto { overflow-x: auto; }
+    .truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .whitespace-nowrap { white-space: nowrap; }
+    .cursor-pointer { cursor: pointer; }
+    .sticky { position: sticky; }
+    .fixed { position: fixed; }
+    .top-0 { top: 0; }
+    .bottom-5 { bottom: 1.25rem; }
+    .right-5 { right: 1.25rem; }
+    .z-30 { z-index: 30; }
+    .z-50 { z-index: 50; }
+    .border-collapse { border-collapse: collapse; }
+    .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+    .col-span-6 { grid-column: span 6 / span 6; }
+    .col-span-3 { grid-column: span 3 / span 3; }
+    button { cursor: pointer; border: none; background: transparent; font-family: inherit; }
+    input, select, textarea { font-family: inherit; }
+    @media (min-width: 640px) {
+      .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .sm\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .sm\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+      .sm\:col-span-1 { grid-column: span 1 / span 1; }
+      .sm\:col-span-2 { grid-column: span 2 / span 2; }
+    }
+    @media (min-width: 1024px) {
+      .lg\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+      .lg\:col-span-7 { grid-column: span 7 / span 7; }
+      .lg\:col-span-5 { grid-column: span 5 / span 5; }
+      .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .lg\:sticky { position: sticky; }
+      .lg\:top-20 { top: 5rem; }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    /* Brand tokens for the official Andarela Tur document preview */
+    .andarela-navy {
+      background-color: #162B4E;
+    }
+    .andarela-navy-dark {
+      background-color: #0E1D38;
+    }
+    .andarela-red {
+      background-color: #C8321E;
+    }
+    .andarela-crimson {
+      background-color: #D91E36;
+    }
+    .andarela-border-navy {
+      border-color: #162B4E;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.4);
+      border-radius: 9999px;
+    }
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #printable-area, #printable-area * {
+        visibility: visible;
+      }
+      #printable-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        box-shadow: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-[var(--background)] text-[var(--foreground)] antialiased selection:bg-red-600 selection:text-white">
+
+  <!-- Top Brand Header -->
+  <header class="andarela-navy text-white border-b border-white/10 sticky top-0 z-30 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3.5">
+        <div class="bg-white/95 px-3 py-1.5 rounded-lg shadow-sm flex items-center">
+          <img id="brand-logo-red" src="data:image/png;base64,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" alt="Andarela Tur" class="h-9 w-auto object-contain" />
+          <img id="brand-logo-white" src="data:image/png;base64,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" alt="Andarela Tur White" class="hidden" />
+        </div>
+        <div>
+          <h1 class="text-base sm:text-lg font-bold tracking-tight text-white flex items-center gap-2">
+            Gerador de Orçamentos
+            <span class="text-xs font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-[#D91E36] text-white">2024/2025</span>
+          </h1>
+          <p class="text-xs text-slate-300">Cálculo 100% automático sem erro de fórmula • Exportação pronta em PDF e Imagem WhatsApp</p>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="flex items-center gap-1.5 bg-[#0E1D38] p-1 rounded-xl border border-white/10">
+        <button id="tab-btn-builder" onclick="switchMainTab('builder')" class="px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-[#D91E36] text-white shadow-sm">
+          🧮 Criar Orçamento
+        </button>
+        <button id="tab-btn-presets" onclick="switchMainTab('presets')" class="px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-200 hover:text-white hover:bg-white/10">
+          📋 As 8 Tabelas Prontas
+        </button>
+        <button id="tab-btn-reference" onclick="switchMainTab('reference')" class="px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-200 hover:text-white hover:bg-white/10">
+          📘 Tabela Oficial & Descontos
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 hidden transform transition-all duration-300">
+    <div class="andarela-navy text-white px-4 py-3 rounded-xl shadow-xl border border-white/15 flex items-center gap-3 text-sm font-medium">
+      <span id="toast-icon" class="text-lg">✅</span>
+      <span id="toast-msg">Ação realizada com sucesso!</span>
+    </div>
+  </div>
+
+  <!-- Main Workspace Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-5">
+
+    <!-- ========================================== -->
+    <!-- TAB 1: CRIAR ORÇAMENTO (BUILDER + PREVIEW) -->
+    <!-- ========================================== -->
+    <section id="tab-builder" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+      <!-- Left Column: Guided Controls (7 cols on lg) -->
+      <div class="lg:col-span-7 space-y-5">
+
+        <!-- Quick Bar: Load from the 8 Excel Templates -->
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 shadow-sm">
+          <div class="flex items-center justify-between gap-2 mb-2.5">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#D91E36]"></span>
+              <h2 class="text-sm font-bold uppercase tracking-wider text-[var(--foreground)]">
+                1. Começar por um Modelo da Planilha ou Assistente Rápido
+              </h2>
+            </div>
+            <button onclick="resetToClean()" class="text-xs font-medium text-red-500 hover:underline">
+              Limpar tudo
+            </button>
+          </div>
+          <p class="text-xs text-[var(--muted-foreground)] mb-3">
+            Escolha um dos <strong>8 modelos da planilha</strong> para carregar instantaneamente ou use o <strong>Montador Rápido pelo Perfil do Cliente</strong> abaixo:
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="quick-preset-buttons">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Step 2: Client Profile Wizard (No-math automatic configurator) -->
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 sm:p-5 shadow-sm space-y-4">
+          <div class="flex items-center justify-between border-b border-[var(--border)] pb-3">
+            <div>
+              <h2 class="text-base font-bold text-[var(--foreground)] flex items-center gap-2">
+                <span>⚡ Montador Automático por Perfil do Cliente</span>
+              </h2>
+              <p class="text-xs text-[var(--muted-foreground)]">
+                Marque as características do cliente no WhatsApp e o sistema monta todas as linhas e fórmulas sozinho.
+              </p>
+            </div>
+            <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-600">
+              Zero Erro
+            </span>
+          </div>
+
+          <!-- Client Info & Title -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="sm:col-span-1">
+              <label class="block text-xs font-semibold text-[var(--muted-foreground)] mb-1">Nome do Cliente / Família</label>
+              <input id="client-name" type="text" placeholder="Ex: Família Silva (Opcional)" oninput="syncStateFromInputs()"
+                class="w-full px-3 py-2 rounded-lg text-sm bg-[var(--background)] border border-[var(--border)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-red-500" />
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-semibold text-[var(--muted-foreground)] mb-1">Título do Orçamento no Cabeçalho</label>
+              <input id="budget-title" type="text" value="ORÇAMENTO 4 PESSOAS - VISTO AMERICANO" oninput="syncStateFromInputs()"
+                class="w-full px-3 py-2 rounded-lg text-sm font-semibold bg-[var(--background)] border border-[var(--border)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-red-500" />
+            </div>
+          </div>
+
+          <!-- Smart Profile Generator Box -->
+          <div class="p-3.5 rounded-xl bg-[var(--background)] border border-[var(--border)] space-y-3.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-[var(--foreground)]">
+                Configurar Solicitantes de Visto Americano
+              </span>
+              <button onclick="applyWizardToItems()" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#162B4E] hover:bg-[#1f3b6b] text-white transition shadow-sm">
+                🔄 Aplicar Perfil na Tabela
+              </button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <!-- Sem Entrevista -->
+              <div class="p-2.5 rounded-lg bg-[var(--card)] border border-[var(--border)]">
+                <label class="block text-xs font-bold text-[var(--foreground)] mb-1">Qtd. SEM Entrevista (SE)</label>
+                <input id="wiz-se-qty" type="number" min="0" max="20" value="0" onchange="applyWizardToItems()"
+                  class="w-full px-2.5 py-1.5 rounded border border-[var(--border)] bg-[var(--background)] text-sm font-bold text-[var(--foreground)] mb-2" />
+                <label class="block text-xs text-[var(--muted-foreground)] mb-1">Plano (Sem Entrevista)</label>
+                <select id="wiz-se-plan" onchange="applyWizardToItems()" class="w-full px-2 py-1.5 rounded border border-[var(--border)] bg-[var(--background)] text-xs text-[var(--foreground)] mb-1.5">
+                  <option value="essencial">Essencial (R$ 400 - Cliente entrega)</option>
+                  <option value="plus_sp" selected>Plano Plus SP (R$ 500 - Entrega SP)</option>
+                  <option value="plus_outros_junto">Plano Plus RJ/BSB/REC/POA (R$ 650)</option>
+                  <option value="plus_outros_sep">Plano Plus (R$ 500) + Entrega (R$ 150)</option>
+                  <option value="urgencia">Plano Urgência (R$ 700)</option>
+                </select>
+                <label class="block text-xs text-[var(--muted-foreground)] mb-1">Consulado Entrega</label>
+                <select id="wiz-se-city" onchange="applyWizardToItems()" class="w-full px-2 py-1 rounded border border-[var(--border)] bg-[var(--background)] text-xs text-[var(--foreground)]">
+                  <option value="SP">São Paulo (SP)</option>
+                  <option value="RJ">Rio de Janeiro (RJ)</option>
+                  <option value="BSB">Brasília (BSB)</option>
+                  <option value="REC">Recife (REC)</option>
+                  <option value="POA">Porto Alegre (POA)</option>
+                </select>
+              </div>
+
+              <!-- Com Entrevista -->
+              <div class="p-2.5 rounded-lg bg-[var(--card)] border border-[var(--border)]">
+                <label class="block text-xs font-bold text-[var(--foreground)] mb-1">Qtd. COM Entrevista (CE)</label>
+                <input id="wiz-ce-qty" type="number" min="0" max="20" value="4" onchange="applyWizardToItems()"
+                  class="w-full px-2.5 py-1.5 rounded border border-[var(--border)] bg-[var(--background)] text-sm font-bold text-[var(--foreground)] mb-2" />
+                <label class="block text-xs text-[var(--muted-foreground)] mb-1">Plano (Com Entrevista)</label>
+                <select id="wiz-ce-plan" onchange="applyWizardToItems()" class="w-full px-2 py-1.5 rounded border border-[var(--border)] bg-[var(--background)] text-xs text-[var(--foreground)] mb-1.5">
+                  <option value="essencial">Essencial (R$ 400 - Orientação arquivo)</option>
+                  <option value="plus" selected>Plano Plus (R$ 500 - Vídeo chamada)</option>
+                  <option value="urgencia">Plano Urgência (R$ 700 - Plantão + Vídeo)</option>
+                </select>
+                <div class="text-xs text-[var(--muted-foreground)] mt-2 leading-snug">
+                  💡 <em>Misturou SE e CE na mesma família? Basta colocar a quantidade em cada um!</em>
+                </div>
+              </div>
+
+              <!-- Passaporte & Taxas -->
+              <div class="p-2.5 rounded-lg bg-[var(--card)] border border-[var(--border)]">
+                <label class="block text-xs font-bold text-[var(--foreground)] mb-1">Qtd. Passaporte Brasileiro</label>
+                <input id="wiz-pass-qty" type="number" min="0" max="20" value="4" onchange="applyWizardToItems()"
+                  class="w-full px-2.5 py-1.5 rounded border border-[var(--border)] bg-[var(--background)] text-sm font-bold text-[var(--foreground)] mb-2" />
+                <label class="flex items-center gap-1.5 text-xs text-[var(--foreground)] cursor-pointer mb-1.5">
+                  <input id="wiz-pass-half" type="checkbox" checked onchange="applyWizardToItems()" class="rounded text-red-600" />
+                  <span>50% OFF fechando visto (R$ 90)</span>
+                </label>
+                <label class="flex items-center gap-1.5 text-xs text-[var(--foreground)] cursor-pointer mb-1.5">
+                  <input id="wiz-pass-gru" type="checkbox" checked onchange="applyWizardToItems()" class="rounded text-red-600" />
+                  <span>Incluir Taxa PF GRU (R$ 257,25)</span>
+                </label>
+                <label class="flex items-center gap-1.5 text-xs text-[var(--foreground)] cursor-pointer">
+                  <input id="wiz-include-mrv" type="checkbox" checked onchange="applyWizardToItems()" class="rounded text-red-600" />
+                  <span>Incluir Taxa MRV + Sedex</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Consular Fee & Sedex Config -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-[var(--border)]">
+              <div>
+                <label class="block text-xs font-semibold text-[var(--muted-foreground)] mb-1">
+                  🚨 Taxa Consular MRV (US$ 185) em R$
+                </label>
+                <div class="flex items-center gap-1.5">
+                  <input id="wiz-mrv-val" type="number" step="0.5" value="1017.50" onchange="updateMrvRateEverywhere(this.value)"
+                    class="w-full px-2.5 py-1.5 rounded border border-[var(--border)] bg-[var(--card)] text-sm font-bold text-[var(--foreground)]" />
+                </div>
+                <div class="flex flex-wrap gap-1 mt-1.5">
+                  <button type="button" onclick="updateMrvRateEverywhere(1147)" class="px-1.5 py-0.5 text-xs rounded bg-[var(--card)] border border-[var(--border)] hover:border-red-500">R$ 1.147</button>
+                  <button type="button" onclick="updateMrvRateEverywhere(1036)" class="px-1.5 py-0.5 text-xs rounded bg-[var(--card)] border border-[var(--border)] hover:border-red-500">R$ 1.036</button>
+                  <button type="button" onclick="updateMrvRateEverywhere(1017.5)" class="px-1.5 py-0.5 text-xs rounded bg-[var(--card)] border border-[var(--border)] hover:border-red-500">R$ 1.017,50</button>
+                  <button type="button" onclick="updateMrvRateEverywhere(962)" class="px-1.5 py-0.5 text-xs rounded bg-[var(--card)] border border-[var(--border)] hover:border-red-500">R$ 962</button>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-[var(--muted-foreground)] mb-1">
+                  💵 Ou calcular p/ Dólar Consular (× US$ 185)
+                </label>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-xs text-[var(--muted-foreground)]">R$</span>
+                  <input id="wiz-usd-rate" type="number" step="0.01" value="5.50" oninput="calcMrvFromUsd(this.value)"
+                    class="w-full px-2.5 py-1.5 rounded border border-[var(--border)] bg-[var(--card)] text-sm text-[var(--foreground)]" />
+                </div>
+                <p class="text-xs text-[var(--muted-foreground)] mt-1">
+                  Ex: Dólar 6,20 × 185 = <strong>R$ 1.147,00</strong>
+                </p>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-[var(--muted-foreground)] mb-1">
+                  📮 Valor Sedex Consulado (Opcional)
+                </label>
+                <div class="flex items-center gap-1.5">
+                  <input id="wiz-sedex-val" type="number" step="1" value="69.00" onchange="updateSedexRateEverywhere(this.value)"
+                    class="w-full px-2.5 py-1.5 rounded border border-[var(--border)] bg-[var(--card)] text-sm font-bold text-[var(--foreground)]" />
+                </div>
+                <div class="flex gap-1.5 mt-1.5">
+                  <button type="button" onclick="updateSedexRateEverywhere(64)" class="px-2 py-0.5 text-xs rounded bg-[var(--card)] border border-[var(--border)] hover:border-red-500">R$ 64,00</button>
+                  <button type="button" onclick="updateSedexRateEverywhere(69)" class="px-2 py-0.5 text-xs rounded bg-[var(--card)] border border-[var(--border)] hover:border-red-500">R$ 69,00</button>
+                  <button type="button" onclick="removeSedexRows()" class="px-2 py-0.5 text-xs rounded bg-red-500/10 text-red-500 hover:bg-red-500/20">Sem Sedex</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Itemized Lines Table + 1-Click Add Service Catalog -->
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 sm:p-5 shadow-sm space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h2 class="text-base font-bold text-[var(--foreground)]">
+                2. Itens do Orçamento (Fórmulas Automáticas)
+              </h2>
+              <p class="text-xs text-[var(--muted-foreground)]">
+                Altere quantidades ou valores unitários se precisar — o subtotal e os descontos recalculam sozinhos.
+              </p>
+            </div>
+            <button onclick="addCustomRow()" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#D91E36] hover:bg-red-700 text-white transition shadow-sm">
+              + Adicionar Linha Manual
+            </button>
+          </div>
+
+          <!-- Quick Add Service Pills from the Official 2024/2025 Price Table -->
+          <div>
+            <label class="block text-xs font-semibold text-[var(--muted-foreground)] mb-1.5">
+              Adicionar serviço avulso da Tabela Oficial 2024/2025 com 1 clique:
+            </label>
+            <div class="flex flex-wrap gap-1.5" id="catalog-pills">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <!-- Editable Rows Container -->
+          <div class="overflow-x-auto border border-[var(--border)] rounded-xl">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-[var(--background)] border-b border-[var(--border)] text-xs font-bold text-[var(--muted-foreground)] uppercase">
+                  <th class="py-2.5 px-3">Descrição do Serviço / Taxa</th>
+                  <th class="py-2.5 px-2 w-24 text-center">Categoria</th>
+                  <th class="py-2.5 px-2 w-20 text-center">Qtd.</th>
+                  <th class="py-2.5 px-2 w-28 text-right">Unitário (R$)</th>
+                  <th class="py-2.5 px-3 w-28 text-right">Subtotal</th>
+                  <th class="py-2.5 px-2 w-10 text-center"></th>
+                </tr>
+              </thead>
+              <tbody id="builder-rows-tbody" class="divide-y divide-[var(--border)] text-sm">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Step 4: Automatic Discount Engine & Credit Card Installments -->
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 sm:p-5 shadow-sm space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-base font-bold text-[var(--foreground)]">
+                3. Desconto Inteligente & Parcelamento
+              </h2>
+              <p class="text-xs text-[var(--muted-foreground)]">
+                O desconto em % incide <strong>somente sobre a Assessoria de Visto</strong> (nunca desconta a taxa do consulado/PF por engano!).
+              </p>
+            </div>
+          </div>
+
+          <!-- Discount Mode Buttons -->
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
+            <button type="button" id="disc-btn-none" onclick="setDiscountMode('none')" class="px-2.5 py-2 rounded-lg text-xs font-semibold border border-[var(--border)] transition">
+              Sem Desconto
+            </button>
+            <button type="button" id="disc-btn-pct10" onclick="setDiscountMode('pct', 10, 'Desconto 10%')" class="px-2.5 py-2 rounded-lg text-xs font-semibold border border-[var(--border)] transition">
+              🏷️ 10% Assessoria
+            </button>
+            <button type="button" id="disc-btn-pct15" onclick="setDiscountMode('pct', 15, 'Desconto 15%')" class="px-2.5 py-2 rounded-lg text-xs font-semibold border border-[var(--border)] transition">
+              🏷️ 15% Assessoria
+            </button>
+            <button type="button" id="disc-btn-table_se" onclick="setDiscountMode('table_se')" class="px-2.5 py-2 rounded-lg text-xs font-semibold border border-[var(--border)] transition">
+              📊 Tabela SE (2 a 6p)
+            </button>
+            <button type="button" id="disc-btn-fixed" onclick="setDiscountMode('fixed', 100, 'Desconto família')" class="px-2.5 py-2 rounded-lg text-xs font-semibold border border-[var(--border)] transition">
+              💲 Valor Fixo (R$)
+            </button>
+          </div>
+
+          <!-- Discount Details Row -->
+          <div id="discount-config-panel" class="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3.5 rounded-xl bg-[var(--background)] border border-[var(--border)]">
+            <div>
+              <label class="block text-xs font-semibold text-[var(--muted-foreground)] mb-1">Nome / Rótulo do Desconto na Tabela</label>
+              <input id="discount-label" type="text" value="Desconto 15%" oninput="syncDiscountInputs()"
+                class="w-full px-3 py-1.5 rounded-lg text-sm bg-[var(--card)] border border-[var(--border)] text-[var(--foreground)]" />
+              <div class="flex flex-wrap gap-1 mt-1.5">
+                <button type="button" onclick="setDiscountLabel('Desconto família')" class="text-xs px-1.5 py-0.5 rounded bg-[var(--card)] border border-[var(--border)]">Desconto família</button>
+                <button type="button" onclick="setDiscountLabel('Desconto 10%')" class="text-xs px-1.5 py-0.5 rounded bg-[var(--card)] border border-[var(--border)]">Desconto 10%</button>
+                <button type="button" onclick="setDiscountLabel('Desconto 15%')" class="text-xs px-1.5 py-0.5 rounded bg-[var(--card)] border border-[var(--border)]">Desconto 15%</button>
+              </div>
+            </div>
+
+            <div>
+              <label id="discount-val-label" class="block text-xs font-semibold text-[var(--muted-foreground)] mb-1">Valor ou Percentual</label>
+              <input id="discount-value" type="number" step="1" value="15" oninput="syncDiscountInputs()"
+                class="w-full px-3 py-1.5 rounded-lg text-sm font-bold bg-[var(--card)] border border-[var(--border)] text-[var(--foreground)]" />
+              <p id="discount-helper-text" class="text-xs text-emerald-600 font-medium mt-1">
+                Calculado sobre R$ 2.000,00 = -R$ 300,00
+              </p>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-[var(--muted-foreground)] mb-1">Desconto Extra Criança (0-13 anos)</label>
+              <div class="flex items-center gap-2">
+                <input id="child-discount-qty" type="number" min="0" max="10" value="0" oninput="syncDiscountInputs()"
+                  class="w-20 px-2.5 py-1.5 rounded-lg text-sm font-bold bg-[var(--card)] border border-[var(--border)] text-[var(--foreground)]" />
+                <span class="text-xs text-[var(--muted-foreground)]">× R$ 50,00 por criança</span>
+              </div>
+              <p class="text-xs text-[var(--muted-foreground)] mt-1">
+                Regra da planilha: até R$ 50/criança se pedir.
+              </p>
+            </div>
+          </div>
+
+          <!-- Footer Observation & Display Options -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-[var(--border)]">
+            <div>
+              <label class="block text-xs font-semibold text-[var(--muted-foreground)] mb-1">Observação no Rodapé do Orçamento</label>
+              <textarea id="budget-note" rows="2" oninput="syncStateFromInputs()"
+                class="w-full px-3 py-1.5 rounded-lg text-xs bg-[var(--background)] border border-[var(--border)] text-[var(--foreground)]">O visto terá validade de 10 anos e dará direito a entrada em outros países como México e Canadá (eTA).</textarea>
+              <div class="flex flex-wrap gap-1 mt-1">
+                <button type="button" onclick="setNotePreset('visto')" class="text-xs px-2 py-0.5 rounded bg-[var(--background)] border border-[var(--border)]">Nota Visto 10 Anos</button>
+                <button type="button" onclick="setNotePreset('eta')" class="text-xs px-2 py-0.5 rounded bg-[var(--background)] border border-[var(--border)]">Nota eTA Canadense (5 Anos)</button>
+                <button type="button" onclick="setNotePreset('none')" class="text-xs px-2 py-0.5 rounded bg-[var(--background)] border border-[var(--border)]">Sem Nota</button>
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <label class="block text-xs font-semibold text-[var(--muted-foreground)] mb-1">Opções de Apresentação no PDF / Imagem</label>
+              <label class="flex items-center gap-2 text-xs text-[var(--foreground)] cursor-pointer">
+                <input id="opt-show-installments" type="checkbox" checked onchange="syncStateFromInputs()" class="rounded text-red-600" />
+                <span>Mostrar regra de <strong>Parcelamento no Cartão</strong> dos serviços Andarela</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs text-[var(--foreground)] cursor-pointer">
+                <input id="opt-show-breakdown" type="checkbox" checked onchange="syncStateFromInputs()" class="rounded text-red-600" />
+                <span>Mostrar separação <strong>Serviços Andarela vs. Taxas Oficiais</strong></span>
+              </label>
+              <label class="flex items-center gap-2 text-xs text-[var(--foreground)] cursor-pointer">
+                <input id="opt-show-plan-details" type="checkbox" checked onchange="syncStateFromInputs()" class="rounded text-red-600" />
+                <span>Incluir <strong>O que está incluso no Plano</strong> no rodapé do PDF</span>
+              </label>
+              <div class="pt-1">
+                <input id="budget-validity" type="text" placeholder="Validade (ex: Orçamento sujeito a variação cambial)" value="Valores das taxas consulares sujeitos à variação cambial do dia." oninput="syncStateFromInputs()"
+                  class="w-full px-2.5 py-1 rounded text-xs bg-[var(--background)] border border-[var(--border)] text-[var(--foreground)]" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Live Official Preview + One-Click PDF / PNG / WhatsApp Export (5 cols on lg) -->
+      <div class="lg:col-span-5 lg:sticky lg:top-20 space-y-4">
+
+        <!-- Action Buttons Bar -->
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-3.5 shadow-sm space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-[var(--foreground)]">
+              4. Exportar e Enviar para o Cliente
+            </span>
+            <span class="text-xs text-emerald-600 font-semibold">Pronto para WhatsApp</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <button onclick="downloadBudgetPDF()" class="w-full py-2.5 px-4 rounded-xl font-bold text-sm bg-[#D91E36] hover:bg-red-700 text-white shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
+              <span>📄 Baixar PDF Oficial</span>
+            </button>
+            <button onclick="downloadBudgetPNG()" class="w-full py-2.5 px-4 rounded-xl font-bold text-sm bg-[#162B4E] hover:bg-[#1f3b6b] text-white shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
+              <span>🖼️ Baixar Imagem (PNG)</span>
+            </button>
+          </div>
+          <button onclick="sharePDFOnMobile()" class="w-full py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm transition flex items-center justify-center gap-2">
+            <span>📲 Compartilhar PDF Direto no WhatsApp (Celular)</span>
+          </button>
+          <div class="grid grid-cols-2 gap-2">
+            <button onclick="copyWhatsAppText()" class="w-full py-2 px-3 rounded-lg font-semibold text-xs bg-[var(--background)] hover:bg-slate-500/10 text-[var(--foreground)] border border-[var(--border)] transition flex items-center justify-center gap-1.5">
+              <span>💬 Copiar Texto WhatsApp</span>
+            </button>
+            <button onclick="window.print()" class="w-full py-2 px-3 rounded-lg font-semibold text-xs bg-[var(--background)] hover:bg-slate-500/10 text-[var(--foreground)] border border-[var(--border)] transition flex items-center justify-center gap-1.5">
+              <span>🖨️ Imprimir / Salvar</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- LIVE VISUAL CARD PREVIEW (Matches the exact Andarela Tur Brand Colors) -->
+        <div id="printable-area" class="rounded-2xl overflow-hidden shadow-xl border-2 border-[#162B4E] bg-white text-slate-900">
+          <!-- Branded Navy Header -->
+          <div class="andarela-navy px-6 py-5 text-white relative overflow-hidden">
+            <div class="flex items-center justify-between gap-4">
+              <div class="bg-white px-3.5 py-2 rounded-xl shadow-md">
+                <img src="data:image/png;base64,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" alt="Andarela Tur" class="h-10 w-auto object-contain" />
+              </div>
+              <div class="text-right">
+                <span class="inline-block text-xs font-bold uppercase tracking-widest px-2.5 py-0.5 rounded bg-[#C8321E] text-white mb-1">
+                  Proposta Oficial
+                </span>
+                <p id="preview-date" class="text-xs text-slate-200 font-medium">Data: --/--/----</p>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-white/15 flex flex-wrap items-baseline justify-between gap-2">
+              <h3 id="preview-title" class="text-base sm:text-lg font-extrabold tracking-wide text-white uppercase">
+                ORÇAMENTO 4 PESSOAS
+              </h3>
+              <p id="preview-client" class="text-xs text-amber-300 font-semibold hidden"></p>
+            </div>
+          </div>
+
+          <!-- Red Subheader Banner -->
+          <div class="andarela-red text-white px-6 py-2 flex items-center justify-between text-xs font-bold uppercase tracking-wider">
+            <span>Descrição dos Serviços e Taxas</span>
+            <span>Valores em R$</span>
+          </div>
+
+          <!-- Table Content -->
+          <div class="p-5 sm:p-6 bg-white space-y-4">
+            <div class="overflow-x-auto border border-slate-200 rounded-xl">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-slate-100 text-slate-700 border-b border-slate-200 text-xs font-bold uppercase">
+                    <th class="py-2.5 px-3">Valores / Serviços</th>
+                    <th class="py-2.5 px-2 text-center w-14">Qtd.</th>
+                    <th class="py-2.5 px-3 text-right w-28">Valor Total</th>
+                  </tr>
+                </thead>
+                <tbody id="preview-tbody" class="divide-y divide-slate-200 text-xs sm:text-sm text-slate-800">
+                  <!-- Populated by JS -->
+                </tbody>
+                <tfoot>
+                  <tr id="preview-discount-row" class="bg-emerald-50 text-emerald-800 font-bold border-t border-emerald-200">
+                    <td class="py-2.5 px-3 flex items-center gap-1.5">
+                      <span>🏷️</span>
+                      <span id="preview-discount-label">Desconto 15%</span>
+                    </td>
+                    <td class="py-2.5 px-2 text-center text-xs">—</td>
+                    <td id="preview-discount-val" class="py-2.5 px-3 text-right whitespace-nowrap">- R$ 300,00</td>
+                  </tr>
+                  <tr class="andarela-navy text-white font-extrabold text-sm sm:text-base">
+                    <td class="py-3 px-3 uppercase tracking-wider">Total do Orçamento</td>
+                    <td id="preview-total-qty" class="py-3 px-2 text-center text-xs font-normal text-slate-300"></td>
+                    <td id="preview-total-val" class="py-3 px-3 text-right whitespace-nowrap text-amber-300">R$ 7.435,00</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+
+            <!-- Breakdown Summary Pills (Andarela Services vs Consular/Official Taxes) -->
+            <div id="preview-breakdown-box" class="grid grid-cols-2 gap-2.5 pt-1">
+              <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                <span class="block text-xs text-slate-500 font-semibold">🤝 Serviços Andarela (líquido)</span>
+                <span id="preview-andarela-total" class="text-sm sm:text-base font-extrabold text-[#162B4E]">R$ 2.060,00</span>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                <span class="block text-xs text-slate-500 font-semibold">🚨 Taxas Oficiais / Sedex</span>
+                <span id="preview-taxes-total" class="text-sm sm:text-base font-extrabold text-slate-700">R$ 5.375,00</span>
+              </div>
+            </div>
+
+            <!-- Credit Card Installments Box -->
+            <div id="preview-installments-box" class="p-3 rounded-xl bg-blue-50/80 border border-blue-200 flex items-center justify-between gap-2 text-xs text-slate-800">
+              <div>
+                <span class="font-bold text-[#162B4E]">💳 Parcelamento Serviços Andarela:</span>
+                <span id="preview-installment-text" class="ml-1">Em até 5x no cartão de crédito</span>
+              </div>
+              <span id="preview-per-person" class="font-bold text-[#C8321E] whitespace-nowrap"></span>
+            </div>
+
+            <!-- Included Plan Features Box -->
+            <div id="preview-plan-box" class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5 text-xs text-slate-700">
+              <div class="font-bold text-[#162B4E] uppercase tracking-wider flex items-center gap-1.5">
+                <span>✅ O que está incluso na Assessoria Andarela Tur:</span>
+              </div>
+              <ul id="preview-plan-list" class="grid grid-cols-1 gap-1 pl-1 text-slate-600">
+                <!-- Populated by JS -->
+              </ul>
+            </div>
+
+            <!-- Observation & Validity Footer -->
+            <div id="preview-note-box" class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-950 font-medium leading-relaxed">
+              <span id="preview-note-text">O visto terá validade de 10 anos e dará direito a entrada em outros países como México e Canadá (eTA).</span>
+            </div>
+
+            <div class="pt-2 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
+              <span id="preview-validity-text">Valores das taxas consulares sujeitos à variação cambial do dia.</span>
+              <span class="font-bold text-[#162B4E]">Andarela Tur • Viagens e Vistos</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: AS 8 TABELAS DA PLANILHA + EXTRAS   -->
+    <!-- ========================================== -->
+    <section id="tab-presets" class="hidden space-y-5">
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 shadow-sm">
+        <h2 class="text-lg font-bold text-[var(--foreground)]">
+          📋 Todas as Tabelas de Orçamento da Planilha (1 Clique para Usar)
+        </h2>
+        <p class="text-xs sm:text-sm text-[var(--muted-foreground)] mt-1">
+          Aqui estão exatamente as <strong>8 tabelas da aba Orçamentos (2)</strong> mais os modelos extras das abas <strong>Orçamentos</strong> e <strong>Orçamentos (3)</strong>. Clique em qualquer modelo para carregá-lo no gerador e gerar o PDF!
+        </p>
+        <div id="all-presets-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: TABELA OFICIAL 2024/2025 & DESCONTOS-->
+    <!-- ========================================== -->
+    <section id="tab-reference" class="hidden space-y-6">
+      <!-- Official Price Table Mirroring image.png -->
+      <div class="andarela-navy text-white rounded-2xl p-6 shadow-xl border border-white/15">
+        <div class="text-center max-w-xl mx-auto mb-6">
+          <div class="inline-block bg-white px-5 py-2.5 rounded-xl shadow mb-3">
+            <img src="data:image/png;base64,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" alt="Andarela Tur" class="h-12 w-auto object-contain mx-auto" />
+          </div>
+          <h2 class="text-xl font-extrabold tracking-wider uppercase text-white">Tabela de Valores 2024/2025</h2>
+          <p class="text-xs text-slate-300 mt-1">Divulgação Interna • Clique em "+ Usar no Orçamento" em qualquer linha para adicionar</p>
+        </div>
+
+        <div class="space-y-6 max-w-4xl mx-auto">
+          <!-- Group 1: Serviços Assessorias -->
+          <div class="bg-white text-slate-900 rounded-xl overflow-hidden shadow">
+            <div class="andarela-red text-white px-4 py-2.5 grid grid-cols-12 text-xs sm:text-sm font-extrabold uppercase">
+              <div class="col-span-6">Serviços Assessorias</div>
+              <div class="col-span-3 text-right">Valor Serviço</div>
+              <div class="col-span-3 text-right">Taxa Órgão Resp.</div>
+            </div>
+            <div class="divide-y divide-slate-200 text-xs sm:text-sm font-medium">
+              <div class="px-4 py-2.5 grid grid-cols-12 items-center hover:bg-slate-50">
+                <div class="col-span-6 font-semibold">ASSESSORIA VISTO AMERICANO (Essencial / Plus / Urgência)</div>
+                <div class="col-span-3 text-right font-bold text-[#162B4E]">R$ 400 / R$ 500 / R$ 700</div>
+                <div class="col-span-3 text-right text-slate-600">U$ 185.00</div>
+              </div>
+              <div class="px-4 py-2.5 grid grid-cols-12 items-center hover:bg-slate-50">
+                <div class="col-span-6 font-semibold">ASSESSORIA PASSAPORTE (50% OFF = R$ 90 fechando visto)</div>
+                <div class="col-span-3 text-right font-bold text-[#162B4E]">R$ 180,00</div>
+                <div class="col-span-3 text-right text-slate-600">R$ 257,25 (GRU)</div>
+              </div>
+              <div class="px-4 py-2.5 grid grid-cols-12 items-center hover:bg-slate-50">
+                <div class="col-span-6 font-semibold">ASSESSORIA ETA CANADENSE</div>
+                <div class="col-span-3 text-right font-bold text-[#162B4E]">R$ 200,00</div>
+                <div class="col-span-3 text-right text-slate-600">CAD U$ 7.00</div>
+              </div>
+              <div class="px-4 py-2.5 grid grid-cols-12 items-center hover:bg-slate-50">
+                <div class="col-span-6 font-semibold">ASSESSORIA ESTA (EUA)</div>
+                <div class="col-span-3 text-right font-bold text-[#162B4E]">R$ 200,00</div>
+                <div class="col-span-3 text-right text-slate-600">U$ 21.00</div>
+              </div>
+              <div class="px-4 py-2.5 grid grid-cols-12 items-center hover:bg-slate-50">
+                <div class="col-span-6 font-semibold">ORIENTAÇÃO PERSONALIZADA PARA ENTREVISTA</div>
+                <div class="col-span-3 text-right font-bold text-[#162B4E]">R$ 250,00</div>
+                <div class="col-span-3 text-right text-slate-600">U$ 185.00</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Group 2: Serviços Despacho / Representação -->
+          <div class="bg-white text-slate-900 rounded-xl overflow-hidden shadow">
+            <div class="andarela-red text-white px-4 py-2.5 grid grid-cols-12 text-xs sm:text-sm font-extrabold uppercase">
+              <div class="col-span-6">Serviços Despacho / Representação</div>
+              <div class="col-span-3 text-right">Valor</div>
+              <div class="col-span-3 text-right">Taxa Órgão Resp.</div>
+            </div>
+            <div class="divide-y divide-slate-200 text-xs sm:text-sm font-medium">
+              <div class="px-4 py-2.5 grid grid-cols-12 items-center hover:bg-slate-50">
+                <div class="col-span-6 font-semibold">DESPACHO/REPRESENTAÇÃO SP</div>
+                <div class="col-span-3 text-right font-bold text-[#162B4E]">R$ 200,00</div>
+                <div class="col-span-3 text-right text-slate-600">U$ 185.00</div>
+              </div>
+              <div class="px-4 py-2.5 grid grid-cols-12 items-center hover:bg-slate-50">
+                <div class="col-span-6 font-semibold">DESPACHO/REPRESENTAÇÃO SP <span class="text-[#C8321E] font-bold">URGÊNCIA</span></div>
+                <div class="col-span-3 text-right font-bold text-[#162B4E]">R$ 300,00</div>
+                <div class="col-span-3 text-right text-slate-600">U$ 185.00</div>
+              </div>
+              <div class="px-4 py-2.5 grid grid-cols-12 items-center hover:bg-slate-50">
+                <div class="col-span-6 font-semibold">DESPACHO/REPRESENTAÇÃO RJ, BSB, REC ou POA</div>
+                <div class="col-span-3 text-right font-bold text-[#162B4E]">R$ 300,00</div>
+                <div class="col-span-3 text-right text-slate-600">U$ 185.00</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Group 3: Outros Serviços -->
+          <div class="bg-white text-slate-900 rounded-xl overflow-hidden shadow">
+            <div class="andarela-red text-white px-4 py-2.5 grid grid-cols-12 text-xs sm:text-sm font-extrabold uppercase">
+              <div class="col-span-6">Outros Serviços</div>
+              <div class="col-span-3 text-right">Valor</div>
+              <div class="col-span-3 text-right">Taxa Órgão Resp.</div>
+            </div>
+            <div class="divide-y divide-slate-200 text-xs sm:text-sm font-medium">
+              <div class="px-4 py-2.5 grid grid-cols-12 items-center hover:bg-slate-50">
+                <div class="col-span-6 font-semibold">PLANTÃO ANTECIPAÇÃO ENTREVISTA</div>
+                <div class="col-span-3 text-right font-bold text-[#162B4E]">R$ 300,00</div>
+                <div class="col-span-3 text-right text-slate-600">U$ 185.00</div>
+              </div>
+              <div class="px-4 py-2.5 grid grid-cols-12 items-center hover:bg-slate-50">
+                <div class="col-span-6 font-semibold">CORREÇÃO CONTA CONSULAR</div>
+                <div class="col-span-3 text-right font-bold text-[#162B4E]">R$ 200,00</div>
+                <div class="col-span-3 text-right text-slate-600">U$ 185.00</div>
+              </div>
+              <div class="px-4 py-2.5 grid grid-cols-12 items-center hover:bg-slate-50">
+                <div class="col-span-6 font-semibold">PREENCHIMENTO DS 160</div>
+                <div class="col-span-3 text-right font-bold text-[#162B4E]">R$ 200,00</div>
+                <div class="col-span-3 text-right text-slate-600">U$ 185.00</div>
+              </div>
+              <div class="px-4 py-2.5 grid grid-cols-12 items-center hover:bg-slate-50">
+                <div class="col-span-6 font-semibold">RETIRADA PASSAPORTE NO CONSULADO SP</div>
+                <div class="col-span-3 text-right font-bold text-[#162B4E]">R$ 200,00</div>
+                <div class="col-span-3 text-right text-slate-600">U$ 185.00</div>
+              </div>
+              <div class="px-4 py-2.5 grid grid-cols-12 items-center hover:bg-slate-50">
+                <div class="col-span-6 font-semibold">RETIRADA PASSAPORTE NO CONSULADO RJ, BSB, REC ou POA</div>
+                <div class="col-span-3 text-right font-bold text-[#162B4E]">R$ 300,00</div>
+                <div class="col-span-3 text-right text-slate-600">U$ 185.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Discount Rules & Plan Comparison from Aba Descontos & Aba Planos -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 shadow-sm space-y-3">
+          <h3 class="text-base font-bold text-[var(--foreground)]">📊 Tabela de Descontos Progressivos (Aba Descontos)</h3>
+          <p class="text-xs text-[var(--muted-foreground)]">
+            Valores para <strong>Processo Sem Entrevista (SE — Base R$ 500 = R$ 400 Assessoria + R$ 100 Despacho)</strong>:
+          </p>
+          <table class="w-full text-xs text-left border-collapse border border-[var(--border)]">
+            <thead>
+              <tr class="bg-[var(--background)] border-b border-[var(--border)] font-bold">
+                <th class="p-2">Solicitantes (>14 anos)</th>
+                <th class="p-2 text-right">Total Bruto</th>
+                <th class="p-2 text-right">Desconto</th>
+                <th class="p-2 text-right">Valor Final</th>
+                <th class="p-2 text-right">Por Pessoa</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[var(--border)]">
+              <tr><td class="p-2">2 solicitantes</td><td class="p-2 text-right">R$ 1.000</td><td class="p-2 text-right text-emerald-600 font-bold">-R$ 100 (10%)</td><td class="p-2 text-right font-bold">R$ 900</td><td class="p-2 text-right">R$ 450,00</td></tr>
+              <tr><td class="p-2">3 solicitantes</td><td class="p-2 text-right">R$ 1.500</td><td class="p-2 text-right text-emerald-600 font-bold">-R$ 150 (10%)</td><td class="p-2 text-right font-bold">R$ 1.350</td><td class="p-2 text-right">R$ 450,00</td></tr>
+              <tr><td class="p-2">4 solicitantes</td><td class="p-2 text-right">R$ 2.000</td><td class="p-2 text-right text-emerald-600 font-bold">-R$ 300 (15%)</td><td class="p-2 text-right font-bold">R$ 1.700</td><td class="p-2 text-right">R$ 425,00</td></tr>
+              <tr><td class="p-2">5 solicitantes</td><td class="p-2 text-right">R$ 2.500</td><td class="p-2 text-right text-emerald-600 font-bold">-R$ 400 (16%)</td><td class="p-2 text-right font-bold">R$ 2.100</td><td class="p-2 text-right">R$ 420,00</td></tr>
+              <tr><td class="p-2">6 solicitantes</td><td class="p-2 text-right">R$ 3.000</td><td class="p-2 text-right text-emerald-600 font-bold">-R$ 500 (16,7%)</td><td class="p-2 text-right font-bold">R$ 2.500</td><td class="p-2 text-right">R$ 416,67</td></tr>
+            </tbody>
+          </table>
+          <p class="text-xs text-[var(--muted-foreground)] pt-2">
+            <strong>Processo Com Entrevista (CE — Base R$ 400):</strong> 3 solicitantes = <strong>-R$ 100</strong> (Final R$ 1.100) • 4 solicitantes = <strong>-R$ 150</strong> (Final R$ 1.450).<br/>
+            <strong>Crianças de até 13 anos:</strong> se o cliente pedir, desconto extra de até <strong>R$ 50,00 por criança</strong> na assessoria.
+          </p>
+        </div>
+
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 shadow-sm space-y-3">
+          <h3 class="text-base font-bold text-[var(--foreground)]">💳 Regras de Parcelamento e Requisitos de Isenção</h3>
+          <div class="p-3 rounded-lg bg-[var(--background)] border border-[var(--border)] text-xs space-y-1">
+            <div class="font-bold text-[var(--foreground)] mb-1">Parcelamento no Cartão de Crédito (Serviços Andarela):</div>
+            <div>• De <strong>R$ 700 a R$ 1.000</strong>: em até <strong>2x</strong></div>
+            <div>• De <strong>R$ 1.001 a R$ 1.500</strong>: em até <strong>3x</strong></div>
+            <div>• De <strong>R$ 1.501 a R$ 2.000</strong>: em até <strong>4x</strong></div>
+            <div>• <strong>R$ 2.001 ou mais</strong>: em até <strong>5x</strong></div>
+          </div>
+          <div class="p-3 rounded-lg bg-[var(--background)] border border-[var(--border)] text-xs space-y-1.5">
+            <div class="font-bold text-[var(--foreground)]">Requisitos para Processo SEM Entrevista:</div>
+            <div><strong>Primeiro Visto:</strong> ✅ Criança de 0 a 13 anos cujo um dos pais tenha visto válido ou vencido há menos de 48 meses; ✅ Idosos a partir de 79 anos.</div>
+            <div><strong>Renovação:</strong> ✅ Visto anterior válido ou expirado há menos de 48 meses; ✅ Último visto original e intacto; ✅ Idade inferior a 13 anos ou maior de 26 anos; ✅ Mesmo tipo de visto.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // =========================================================================
+    // DATA & CATALOG FROM TABELA_DE_DESCONTOS_E_VALORES.XLSX
+    // =========================================================================
+    const SERVICE_CATALOG = [
+      { id: 'visto_essencial', label: '🤝 Assessoria Visto Americano Plano Essencial R$ 400,00', unitPrice: 400.00, category: 'visto', planType: 'essencial' },
+      { id: 'visto_plus', label: '🤝 Assessoria Visto Americano Plano Plus R$ 500,00', unitPrice: 500.00, category: 'visto', planType: 'plus' },
+      { id: 'visto_plus_ce', label: '🤝 Assessoria Visto Americano Plano Plus (Com entrevista) R$ 500,00', unitPrice: 500.00, category: 'visto', planType: 'plus' },
+      { id: 'visto_plus_rj', label: '🤝 Assessoria Visto Americano + entrega da documentação no RJ (Sem entrevista) R$ 650,00', unitPrice: 650.00, category: 'visto', planType: 'plus_outros' },
+      { id: 'visto_urgencia', label: '🤝 Assessoria Visto Americano Plano Urgência R$ 700,00', unitPrice: 700.00, category: 'visto', planType: 'urgencia' },
+      { id: 'pass_50', label: '🤝 Assessoria Passaporte R$ 180,00 (desconto de 50%)', unitPrice: 90.00, category: 'andarela' },
+      { id: 'pass_full', label: '🤝 Assessoria Passaporte R$ 180,00', unitPrice: 180.00, category: 'andarela' },
+      { id: 'taxa_mrv', label: '🚨 Taxa consular (MRV) R$ 1.017,50', unitPrice: 1017.50, category: 'taxa' },
+      { id: 'taxa_pf', label: '🚨 Taxa Polícia Federal Passaporte (GRU) R$ 257,25', unitPrice: 257.25, category: 'taxa' },
+      { id: 'sedex', label: '📮 Sedex para devolução do passaporte para sua residência R$ 69,00 opcional', unitPrice: 69.00, category: 'sedex' },
+      { id: 'entrega_outros', label: '📦 Entrega documentação no Consulado (RJ/BSB/REC/POA) R$ 150,00', unitPrice: 150.00, category: 'visto' },
+      { id: 'eta_can', label: '🤝 Assessoria eTA Canadense R$ 200,00', unitPrice: 200.00, category: 'andarela' },
+      { id: 'esta_eua', label: '🤝 Assessoria ESTA (EUA) R$ 200,00', unitPrice: 200.00, category: 'andarela' },
+      { id: 'orientacao_avulsa', label: '🤝 Orientação Personalizada para Entrevista R$ 250,00', unitPrice: 250.00, category: 'andarela' },
+      { id: 'despacho_sp', label: '📦 Despacho / Representação SP R$ 200,00', unitPrice: 200.00, category: 'andarela' },
+      { id: 'despacho_urg', label: '📦 Despacho / Representação SP Urgência R$ 300,00', unitPrice: 300.00, category: 'andarela' },
+      { id: 'despacho_outros', label: '📦 Despacho / Representação RJ, BSB, REC ou POA R$ 300,00', unitPrice: 300.00, category: 'andarela' },
+      { id: 'plantao_antecipacao', label: '⚡ Plantão Antecipação Entrevista R$ 300,00', unitPrice: 300.00, category: 'andarela' },
+      { id: 'correcao_consular', label: '🔧 Correção Conta Consular R$ 200,00', unitPrice: 200.00, category: 'andarela' },
+      { id: 'ds160_avulso', label: '📝 Preenchimento DS 160 R$ 200,00', unitPrice: 200.00, category: 'andarela' },
+      { id: 'retirada_sp', label: '🛂 Retirada Passaporte no Consulado SP R$ 200,00', unitPrice: 200.00, category: 'andarela' },
+      { id: 'retirada_outros', label: '🛂 Retirada Passaporte no Consulado RJ, BSB, REC ou POA R$ 300,00', unitPrice: 300.00, category: 'andarela' }
+    ];
+
+    // All 8 Models from "Orçamentos (2)" + 3 Models from "Orçamentos"
+    const EXCEL_PRESETS = [
+      {
+        id: 'm4',
+        badge: 'Tabela 4 • Mais Completa',
+        shortTitle: '4 Pessoas: Plus + Passaporte 50% + 15% OFF',
+        title: 'ORÇAMENTO 4 PESSOAS',
+        subtitle: 'Plano Plus + Passaporte c/ 50% OFF + Desconto 15%',
+        note: 'O visto terá validade de 10 anos e dará direito a entrada em outros países como México e Canadá (eTA).',
+        discountMode: 'pct',
+        discountValue: 15,
+        discountLabel: 'Desconto 15%',
+        items: [
+          { desc: '🤝 Assessoria Visto Americano Plano Plus R$ 500,00', qty: 4, unitPrice: 500.00, category: 'visto' },
+          { desc: '🚨 Taxa consular (MRV) R$ 1.017,50', qty: 4, unitPrice: 1017.50, category: 'taxa' },
+          { desc: '📮 Sedex para devolução do passaporte para sua residência R$ 69,00 opcional', qty: 4, unitPrice: 69.00, category: 'sedex' },
+          { desc: '🤝 Assessoria Passaporte R$ 180,00 (desconto de 50%)', qty: 4, unitPrice: 90.00, category: 'andarela' },
+          { desc: '🚨 Taxa Polícia Federal Passaporte R$ 257,25', qty: 4, unitPrice: 257.25, category: 'taxa' }
+        ]
+      },
+      {
+        id: 'm1',
+        badge: 'Tabela 1 • Planilha',
+        shortTitle: '3 Pessoas: Plano Essencial',
+        title: 'ORÇAMENTO 3 PESSOAS',
+        subtitle: 'Plano Essencial (R$ 400) + Taxa MRV + Sedex opcional',
+        note: 'O visto terá validade de 10 anos e dará direito a entrada em outros países como México e Canadá (eTA).',
+        discountMode: 'none',
+        discountValue: 0,
+        discountLabel: 'Desconto',
+        items: [
+          { desc: '🤝 Assessoria Visto Americano Plano Essencial R$ 400,00', qty: 3, unitPrice: 400.00, category: 'visto' },
+          { desc: '🚨 Taxa consular (MRV) R$ 962,00', qty: 3, unitPrice: 962.00, category: 'taxa' },
+          { desc: '📮 Sedex para devolução do passaporte p/ sua residência R$ 69,00 opcional', qty: 3, unitPrice: 69.00, category: 'sedex' }
+        ]
+      },
+      {
+        id: 'm2',
+        badge: 'Tabela 2 • Planilha',
+        shortTitle: '4 Pessoas: Plano Plus (Sem Desconto)',
+        title: 'ORÇAMENTO 4 PESSOAS',
+        subtitle: 'Plano Plus (R$ 500) + Taxa MRV + Sedex opcional',
+        note: 'O visto terá validade de 10 anos e dará direito a entrada em outros países como México e Canadá (eTA).',
+        discountMode: 'none',
+        discountValue: 0,
+        discountLabel: 'Desconto',
+        items: [
+          { desc: '🤝 Assessoria Visto Americano Plano Plus R$ 500,00', qty: 4, unitPrice: 500.00, category: 'visto' },
+          { desc: '🚨 Taxa consular (MRV) R$ 943,00', qty: 4, unitPrice: 943.00, category: 'taxa' },
+          { desc: '📮 Sedex para devolução do passaporte p/ sua residência opcional R$ 69,00', qty: 4, unitPrice: 69.00, category: 'sedex' }
+        ]
+      },
+      {
+        id: 'm3',
+        badge: 'Tabela 3 • Casal Misto',
+        shortTitle: '2 Pessoas: 1 CE + 1 Entrega RJ (10% OFF)',
+        title: 'ORÇAMENTO 2 PESSOAS',
+        subtitle: '1 Com Entrevista (R$ 500) + 1 Sem Entrevista Entrega RJ (R$ 650) + 10% OFF',
+        note: 'O visto terá validade de 10 anos e dará direito a entrada em outros países como México e Canadá (eTA).',
+        discountMode: 'pct',
+        discountValue: 10,
+        discountLabel: 'Desconto 10%',
+        items: [
+          { desc: '🤝 Assessoria Visto Americano Plano Plus com entrevista R$ 500,00', qty: 1, unitPrice: 500.00, category: 'visto' },
+          { desc: '🤝 Assessoria Visto Americano Plano Plus entrega RJ R$ 650,00', qty: 1, unitPrice: 650.00, category: 'visto' },
+          { desc: '🚨 Taxa consular (MRV) R$ 962,00', qty: 2, unitPrice: 962.00, category: 'taxa' },
+          { desc: '📮 Sedex para devolução do passaporte para sua residência R$ 64,00 opcional', qty: 2, unitPrice: 64.00, category: 'sedex' }
+        ]
+      },
+      {
+        id: 'm5',
+        badge: 'Tabela 5 • Urgência c/ Desconto',
+        shortTitle: 'Família: Plano Urgência + 15% OFF',
+        title: 'ORÇAMENTO 4 PESSOAS - PLANO URGÊNCIA',
+        subtitle: 'Plano Urgência (R$ 700) + Taxa MRV + Sedex + 15% OFF',
+        note: 'O visto terá validade de 10 anos e dará direito a entrada em outros países como México e Canadá (eTA).',
+        discountMode: 'pct',
+        discountValue: 15,
+        discountLabel: 'Desconto 15%',
+        items: [
+          { desc: '🤝 Assessoria Visto Americano Plano Urgência R$ 700,00', qty: 4, unitPrice: 700.00, category: 'visto' },
+          { desc: '🚨 Taxa consular (MRV) R$ 1.036,00', qty: 4, unitPrice: 1036.00, category: 'taxa' },
+          { desc: '📮 Sedex para devolução do passaporte para sua residência R$ 64,00 opcional', qty: 4, unitPrice: 64.00, category: 'sedex' }
+        ]
+      },
+      {
+        id: 'm6',
+        badge: 'Tabela 6 • Família Plus 15% OFF',
+        shortTitle: '4 Pessoas: Plano Plus + 15% OFF',
+        title: 'ORÇAMENTO 4 PESSOAS',
+        subtitle: 'Plano Plus (R$ 500) + Taxa MRV + Sedex + 15% OFF',
+        note: 'O visto terá validade de 10 anos e dará direito a entrada em outros países como México e Canadá (eTA).',
+        discountMode: 'pct',
+        discountValue: 15,
+        discountLabel: 'Desconto 15%',
+        items: [
+          { desc: '🤝 Assessoria Visto Americano Plano Plus R$ 500,00', qty: 4, unitPrice: 500.00, category: 'visto' },
+          { desc: '🚨 Taxa consular (MRV) R$ 1.017,50', qty: 4, unitPrice: 1017.50, category: 'taxa' },
+          { desc: '📮 Sedex para devolução do passaporte para sua residência R$ 69,00 opcional', qty: 4, unitPrice: 69.00, category: 'sedex' }
+        ]
+      },
+      {
+        id: 'm7',
+        badge: 'Tabela 7 • Dupla Urgência',
+        shortTitle: '2 Pessoas: Plano Urgência',
+        title: 'ORÇAMENTO 2 PESSOAS',
+        subtitle: 'Plano Urgência (R$ 700) + Taxa MRV + Sedex opcional',
+        note: 'O visto terá validade de 10 anos e dará direito a entrada em outros países como México e Canadá (eTA).',
+        discountMode: 'none',
+        discountValue: 0,
+        discountLabel: 'Desconto',
+        items: [
+          { desc: '🤝 Assessoria Visto Americano Plano Urgência R$ 700,00', qty: 2, unitPrice: 700.00, category: 'visto' },
+          { desc: '🚨 Taxa consular (MRV) R$ 962,00', qty: 2, unitPrice: 962.00, category: 'taxa' },
+          { desc: '📮 Sedex para devolução do passaporte p/ sua residência opcional R$ 64,00', qty: 2, unitPrice: 64.00, category: 'sedex' }
+        ]
+      },
+      {
+        id: 'm8',
+        badge: 'Tabela 8 • Individual Completo',
+        shortTitle: '1 Pessoa: Plus + Passaporte 50% OFF',
+        title: 'ORÇAMENTO 1 PESSOA',
+        subtitle: '1 Pessoa Plano Plus + Passaporte c/ 50% OFF + Taxas',
+        note: 'O visto terá validade de 10 anos e dará direito a entrada em outros países como México e Canadá (eTA).',
+        discountMode: 'none',
+        discountValue: 0,
+        discountLabel: 'Desconto',
+        items: [
+          { desc: '🤝 Assessoria Visto Americano Plano Plus R$ 500,00', qty: 1, unitPrice: 500.00, category: 'visto' },
+          { desc: '🚨 Taxa consular (MRV) R$ 943,50', qty: 1, unitPrice: 943.50, category: 'taxa' },
+          { desc: '📮 Sedex para devolução do passaporte para sua residência R$ 69,00', qty: 1, unitPrice: 69.00, category: 'sedex' },
+          { desc: '🤝 Assessoria Passaporte R$ 180,00 (desconto de 50%)', qty: 1, unitPrice: 90.00, category: 'andarela' },
+          { desc: '🚨 Taxa Polícia Federal Passaporte R$ 257,25', qty: 1, unitPrice: 257.25, category: 'taxa' }
+        ]
+      },
+      {
+        id: 'm9',
+        badge: 'Aba Orçamentos • Misto RJ',
+        shortTitle: '4 Pessoas: 2 SE RJ + 2 CE + Passaportes',
+        title: 'ORÇAMENTO 4 PESSOAS - ENTREGA DOS DOCUMENTOS NO CONSULADO DE RJ',
+        subtitle: '2 Sem Entrevista RJ (R$ 650) + 2 Com Entrevista (R$ 500) + 4 Passaportes + 10% OFF',
+        note: 'O visto terá validade de 10 anos e dará direito a entrada em outros países como México e Canadá (eTA).',
+        discountMode: 'pct',
+        discountValue: 10,
+        discountLabel: 'Desconto família',
+        items: [
+          { desc: '🤝 Assessoria Visto Americano + entrega da documentação no RJ (Sem entrevista) R$ 650,00', qty: 2, unitPrice: 650.00, category: 'visto' },
+          { desc: '🤝 Assessoria Visto Americano (Com entrevista) R$ 500,00', qty: 2, unitPrice: 500.00, category: 'visto' },
+          { desc: '🤝 Assessoria Passaporte com 50% de desconto R$ 90,00', qty: 4, unitPrice: 90.00, category: 'andarela' },
+          { desc: '🚨 Taxa Polícia Federal Passaporte R$ 257,25', qty: 4, unitPrice: 257.25, category: 'taxa' },
+          { desc: '🚨 Taxa consular (MRV) R$ 1.147,00', qty: 4, unitPrice: 1147.00, category: 'taxa' },
+          { desc: '📮 Sedex para devolução do passaporte para sua residência R$ 64,00 opcional', qty: 4, unitPrice: 64.00, category: 'sedex' }
+        ]
+      },
+      {
+        id: 'm10',
+        badge: 'Aba Orçamentos • Só Passaporte',
+        shortTitle: 'Somente Passaporte Brasileiro (PF)',
+        title: 'ORÇAMENTO PASSAPORTE BRASILEIRO',
+        subtitle: 'Assessoria Passaporte (R$ 180) + Taxa Polícia Federal GRU (R$ 257,25)',
+        note: '',
+        discountMode: 'none',
+        discountValue: 0,
+        discountLabel: 'Desconto',
+        items: [
+          { desc: '🤝 Assessoria Passaporte R$ 180,00', qty: 1, unitPrice: 180.00, category: 'andarela' },
+          { desc: '🚨 Taxa Polícia Federal Passaporte (GRU) R$ 257,25', qty: 1, unitPrice: 257.25, category: 'taxa' }
+        ]
+      },
+      {
+        id: 'm11',
+        badge: 'Aba Orçamentos • Só Assessoria',
+        shortTitle: 'Somente Serviços Andarela (Sem Taxas)',
+        title: 'VALORES SERVIÇOS ANDARELA TUR',
+        subtitle: 'Correção Conta Consular + Plano Plus + Entrega Consulado c/ Desconto',
+        note: 'O visto terá validade de 10 anos e dará direito a entrada em outros países como México e Canadá (eTA).',
+        discountMode: 'fixed',
+        discountValue: 150,
+        discountLabel: 'Desconto família',
+        items: [
+          { desc: '🔧 Correção conta Consular R$ 300,00', qty: 1, unitPrice: 300.00, category: 'andarela' },
+          { desc: '🤝 Assessoria Visto Americano PLANO PLUS R$ 500,00', qty: 1, unitPrice: 500.00, category: 'visto' },
+          { desc: '📦 Entrega documentação no Consulado R$ 150,00', qty: 1, unitPrice: 150.00, category: 'visto' }
+        ]
+      }
+    ];
+
+    // =========================================================================
+    // APPLICATION STATE
+    // =========================================================================
+    let state = {
+      clientName: '',
+      title: 'ORÇAMENTO 4 PESSOAS',
+      note: 'O visto terá validade de 10 anos e dará direito a entrada em outros países como México e Canadá (eTA).',
+      validity: 'Valores das taxas consulares sujeitos à variação cambial do dia.',
+      discountMode: 'pct', // 'none', 'pct', 'table_se', 'fixed'
+      discountValue: 15,
+      discountLabel: 'Desconto 15%',
+      childDiscountQty: 0,
+      showInstallments: true,
+      showBreakdown: true,
+      showPlanDetails: true,
+      items: JSON.parse(JSON.stringify(EXCEL_PRESETS[0].items))
+    };
+
+    // =========================================================================
+    // FORMATTING HELPERS
+    // =========================================================================
+    function formatBRL(val) {
+      const num = Number(val) || 0;
+      return num.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function showToast(msg, icon = '✅') {
+      const t = document.getElementById('toast');
+      document.getElementById('toast-msg').textContent = msg;
+      document.getElementById('toast-icon').textContent = icon;
+      t.classList.remove('hidden');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => t.classList.add('hidden'), 3200);
+    }
+
+    function switchMainTab(tab) {
+      ['builder', 'presets', 'reference'].forEach(t => {
+        const sec = document.getElementById('tab-' + t);
+        const btn = document.getElementById('tab-btn-' + t);
+        if (t === tab) {
+          sec.classList.remove('hidden');
+          btn.className = 'px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-[#D91E36] text-white shadow-sm';
+        } else {
+          sec.classList.add('hidden');
+          btn.className = 'px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-200 hover:text-white hover:bg-white/10';
+        }
+      });
+    }
+
+    // =========================================================================
+    // CALCULATIONS ENGINE (100% faithful to Excel formulas)
+    // =========================================================================
+    function calculateTotals() {
+      let vistoSubtotal = 0;
+      let otherAndarelaSubtotal = 0;
+      let officialTaxesSubtotal = 0;
+      let totalApplicantsVisto = 0;
+
+      state.items.forEach(item => {
+        const lineTotal = (Number(item.qty) || 0) * (Number(item.unitPrice) || 0);
+        if (item.category === 'visto') {
+          vistoSubtotal += lineTotal;
+          // Count applicants on main visa lines (unitPrice >= 350)
+          if (item.unitPrice >= 350) {
+            totalApplicantsVisto += (Number(item.qty) || 0);
+          }
+        } else if (item.category === 'andarela') {
+          otherAndarelaSubtotal += lineTotal;
+        } else {
+          officialTaxesSubtotal += lineTotal;
+        }
+      });
+
+      const grossAndarela = vistoSubtotal + otherAndarelaSubtotal;
+
+      // Compute primary discount
+      let baseDiscount = 0;
+      const baseForPct = vistoSubtotal > 0 ? vistoSubtotal : grossAndarela;
+
+      if (state.discountMode === 'pct') {
+        baseDiscount = baseForPct * ((Number(state.discountValue) || 0) / 100);
+      } else if (state.discountMode === 'fixed') {
+        baseDiscount = Number(state.discountValue) || 0;
+      } else if (state.discountMode === 'table_se') {
+        // Official progressive discount table from "Descontos" sheet
+        const n = totalApplicantsVisto || 1;
+        const mapSE = { 1: 0, 2: 100, 3: 150, 4: 300, 5: 400, 6: 500 };
+        baseDiscount = mapSE[n] !== undefined ? mapSE[n] : (n > 6 ? 500 : 0);
+      }
+
+      const childDiscount = (Number(state.childDiscountQty) || 0) * 50;
+      const totalDiscount = Math.min(grossAndarela, baseDiscount + childDiscount);
+
+      const netAndarela = Math.max(0, grossAndarela - totalDiscount);
+      const grandTotal = netAndarela + officialTaxesSubtotal;
+
+      // Credit card installment rule from "Descontos" sheet (Rows 25-29)
+      let maxInstallments = 1;
+      if (netAndarela >= 2001) maxInstallments = 5;
+      else if (netAndarela >= 1501) maxInstallments = 4;
+      else if (netAndarela >= 1001) maxInstallments = 3;
+      else if (netAndarela >= 700) maxInstallments = 2;
+
+      return {
+        vistoSubtotal,
+        otherAndarelaSubtotal,
+        grossAndarela,
+        officialTaxesSubtotal,
+        baseForPct,
+        baseDiscount,
+        childDiscount,
+        totalDiscount,
+        netAndarela,
+        grandTotal,
+        totalApplicantsVisto,
+        maxInstallments
+      };
+    }
+
+    // =========================================================================
+    // WIZARD & PRESET ACTIONS
+    // =========================================================================
+    function loadPreset(presetId) {
+      const p = EXCEL_PRESETS.find(x => x.id === presetId);
+      if (!p) return;
+      state.title = p.title;
+      state.note = p.note;
+      state.discountMode = p.discountMode;
+      state.discountValue = p.discountValue;
+      state.discountLabel = p.discountLabel;
+      state.childDiscountQty = 0;
+      state.items = JSON.parse(JSON.stringify(p.items));
+
+      document.getElementById('budget-title').value = state.title;
+      document.getElementById('budget-note').value = state.note;
+      document.getElementById('discount-label').value = state.discountLabel;
+      document.getElementById('discount-value').value = state.discountValue;
+      document.getElementById('child-discount-qty').value = 0;
+
+      switchMainTab('builder');
+      renderAll();
+      showToast(`Modelo "${p.shortTitle}" carregado!`);
+    }
+
+    function resetToClean() {
+      state.clientName = '';
+      state.title = 'ORÇAMENTO 1 PESSOA';
+      state.discountMode = 'none';
+      state.discountValue = 0;
+      state.discountLabel = 'Desconto';
+      state.childDiscountQty = 0;
+      state.items = [
+        { desc: '🤝 Assessoria Visto Americano Plano Plus R$ 500,00', qty: 1, unitPrice: 500.00, category: 'visto' },
+        { desc: '🚨 Taxa consular (MRV) R$ 1.147,00', qty: 1, unitPrice: 1147.00, category: 'taxa' },
+        { desc: '📮 Sedex para devolução do passaporte para sua residência R$ 64,00 opcional', qty: 1, unitPrice: 64.00, category: 'sedex' }
+      ];
+      document.getElementById('client-name').value = '';
+      document.getElementById('budget-title').value = state.title;
+      document.getElementById('child-discount-qty').value = 0;
+      renderAll();
+      showToast('Orçamento reiniciado!', '🧹');
+    }
+
+    function applyWizardToItems() {
+      const seQty = Math.max(0, parseInt(document.getElementById('wiz-se-qty').value) || 0);
+      const sePlan = document.getElementById('wiz-se-plan').value;
+      const seCity = document.getElementById('wiz-se-city').value;
+
+      const ceQty = Math.max(0, parseInt(document.getElementById('wiz-ce-qty').value) || 0);
+      const cePlan = document.getElementById('wiz-ce-plan').value;
+
+      const passQty = Math.max(0, parseInt(document.getElementById('wiz-pass-qty').value) || 0);
+      const passHalf = document.getElementById('wiz-pass-half').checked;
+      const passGru = document.getElementById('wiz-pass-gru').checked;
+      const includeMrv = document.getElementById('wiz-include-mrv').checked;
+
+      const mrvVal = parseFloat(document.getElementById('wiz-mrv-val').value) || 1017.50;
+      const sedexVal = parseFloat(document.getElementById('wiz-sedex-val').value) || 69.00;
+
+      const newItems = [];
+      const totalVisto = seQty + ceQty;
+
+      // 1. Add Sem Entrevista (SE) lines
+      if (seQty > 0) {
+        if (sePlan === 'essencial') {
+          newItems.push({ desc: '🤝 Assessoria Visto Americano Plano Essencial (Sem entrevista) R$ 400,00', qty: seQty, unitPrice: 400, category: 'visto' });
+        } else if (sePlan === 'plus_sp') {
+          newItems.push({ desc: '🤝 Assessoria Visto Americano Plano Plus R$ 500,00', qty: seQty, unitPrice: 500, category: 'visto' });
+        } else if (sePlan === 'plus_outros_junto') {
+          const cityLabel = seCity === 'SP' ? 'RJ/BSB/REC/POA' : seCity;
+          newItems.push({ desc: `🤝 Assessoria Visto Americano + entrega da documentação no ${cityLabel} (Sem entrevista) R$ 650,00`, qty: seQty, unitPrice: 650, category: 'visto' });
+        } else if (sePlan === 'plus_outros_sep') {
+          const cityLabel = seCity === 'SP' ? 'Consulado' : seCity;
+          newItems.push({ desc: '🤝 Assessoria Visto Americano PLANO PLUS R$ 500,00', qty: seQty, unitPrice: 500, category: 'visto' });
+          newItems.push({ desc: `📦 Entrega documentação no Consulado (${cityLabel}) R$ 150,00`, qty: seQty, unitPrice: 150, category: 'visto' });
+        } else if (sePlan === 'urgencia') {
+          newItems.push({ desc: '🤝 Assessoria Visto Americano Plano Urgência R$ 700,00', qty: seQty, unitPrice: 700, category: 'visto' });
+        }
+      }
+
+      // 2. Add Com Entrevista (CE) lines
+      if (ceQty > 0) {
+        const suffix = seQty > 0 ? ' (Com entrevista)' : '';
+        if (cePlan === 'essencial') {
+          newItems.push({ desc: `🤝 Assessoria Visto Americano Plano Essencial${suffix} R$ 400,00`, qty: ceQty, unitPrice: 400, category: 'visto' });
+        } else if (cePlan === 'plus') {
+          newItems.push({ desc: `🤝 Assessoria Visto Americano Plano Plus${suffix} R$ 500,00`, qty: ceQty, unitPrice: 500, category: 'visto' });
+        } else if (cePlan === 'urgencia') {
+          newItems.push({ desc: `🤝 Assessoria Visto Americano Plano Urgência${suffix} R$ 700,00`, qty: ceQty, unitPrice: 700, category: 'visto' });
+        }
+      }
+
+      // 3. Add MRV & Sedex if enabled
+      if (includeMrv && totalVisto > 0) {
+        newItems.push({ desc: `🚨 Taxa consular (MRV) ${formatBRL(mrvVal)}`, qty: totalVisto, unitPrice: mrvVal, category: 'taxa' });
+        if (sedexVal > 0) {
+          newItems.push({ desc: `📮 Sedex para devolução do passaporte para sua residência ${formatBRL(sedexVal)} opcional`, qty: totalVisto, unitPrice: sedexVal, category: 'sedex' });
+        }
+      }
+
+      // 4. Add Passport lines
+      if (passQty > 0) {
+        if (passHalf) {
+          newItems.push({ desc: '🤝 Assessoria Passaporte R$ 180,00 (desconto de 50%)', qty: passQty, unitPrice: 90, category: 'andarela' });
+        } else {
+          newItems.push({ desc: '🤝 Assessoria Passaporte R$ 180,00', qty: passQty, unitPrice: 180, category: 'andarela' });
+        }
+        if (passGru) {
+          newItems.push({ desc: '🚨 Taxa Polícia Federal Passaporte R$ 257,25', qty: passQty, unitPrice: 257.25, category: 'taxa' });
+        }
+      }
+
+      if (newItems.length > 0) {
+        state.items = newItems;
+        const pCount = totalVisto > 0 ? totalVisto : passQty;
+        const pLabel = pCount === 1 ? '1 PESSOA' : `${pCount} PESSOAS`;
+        state.title = `ORÇAMENTO ${pLabel}`;
+        document.getElementById('budget-title').value = state.title;
+      }
+
+      renderAll();
+    }
+
+    function calcMrvFromUsd(usdRate) {
+      const rate = parseFloat(usdRate) || 0;
+      if (rate > 0) {
+        const mrv = Math.round(rate * 185 * 100) / 100;
+        document.getElementById('wiz-mrv-val').value = mrv.toFixed(2);
+        updateMrvRateEverywhere(mrv);
+      }
+    }
+
+    function updateMrvRateEverywhere(val) {
+      const num = parseFloat(val) || 0;
+      document.getElementById('wiz-mrv-val').value = num;
+      state.items.forEach(item => {
+        if (item.desc.toLowerCase().includes('mrv') || item.desc.toLowerCase().includes('taxa consular')) {
+          item.unitPrice = num;
+          item.desc = `🚨 Taxa consular (MRV) ${formatBRL(num)}`;
+        }
+      });
+      renderAll();
+    }
+
+    function updateSedexRateEverywhere(val) {
+      const num = parseFloat(val) || 0;
+      document.getElementById('wiz-sedex-val').value = num;
+      let found = false;
+      state.items.forEach(item => {
+        if (item.category === 'sedex' || item.desc.toLowerCase().includes('sedex')) {
+          item.unitPrice = num;
+          item.desc = `📮 Sedex para devolução do passaporte para sua residência ${formatBRL(num)} opcional`;
+          found = true;
+        }
+      });
+      if (!found && num > 0) {
+        const tot = calculateTotals().totalApplicantsVisto || 1;
+        state.items.push({
+          desc: `📮 Sedex para devolução do passaporte para sua residência ${formatBRL(num)} opcional`,
+          qty: tot,
+          unitPrice: num,
+          category: 'sedex'
+        });
+      }
+      renderAll();
+    }
+
+    function removeSedexRows() {
+      state.items = state.items.filter(item => item.category !== 'sedex' && !item.desc.toLowerCase().includes('sedex'));
+      renderAll();
+      showToast('Linha de Sedex removida');
+    }
+
+    function addCatalogItem(catId) {
+      const found = SERVICE_CATALOG.find(x => x.id === catId);
+      if (!found) return;
+      const defaultQty = calculateTotals().totalApplicantsVisto || 1;
+      state.items.push({
+        desc: found.label,
+        qty: defaultQty,
+        unitPrice: found.unitPrice,
+        category: found.category
+      });
+      if (catId === 'eta_can') {
+        state.note = 'O eTA Canadense terá validade de 5 anos ou até a data do vencimento do passaporte se for menor.';
+        document.getElementById('budget-note').value = state.note;
+      }
+      renderAll();
+      showToast(`Adicionado: ${found.label}`);
+    }
+
+    function addCustomRow() {
+      state.items.push({
+        desc: '🤝 Serviço Adicional Andarela Tur',
+        qty: 1,
+        unitPrice: 200.00,
+        category: 'andarela'
+      });
+      renderAll();
+    }
+
+    function removeRow(idx) {
+      state.items.splice(idx, 1);
+      renderAll();
+    }
+
+    function updateRowField(idx, field, val) {
+      if (!state.items[idx]) return;
+      if (field === 'qty' || field === 'unitPrice') {
+        state.items[idx][field] = parseFloat(val) || 0;
+      } else {
+        state.items[idx][field] = val;
+      }
+      renderPreviewOnly();
+    }
+
+    // =========================================================================
+    // DISCOUNT CONTROLS
+    // =========================================================================
+    function setDiscountMode(mode, defaultVal, defaultLabel) {
+      state.discountMode = mode;
+      if (defaultVal !== undefined) {
+        state.discountValue = defaultVal;
+        document.getElementById('discount-value').value = defaultVal;
+      }
+      if (defaultLabel !== undefined) {
+        state.discountLabel = defaultLabel;
+        document.getElementById('discount-label').value = defaultLabel;
+      } else if (mode === 'table_se') {
+        state.discountLabel = 'Desconto família (Tabela Progressiva)';
+        document.getElementById('discount-label').value = state.discountLabel;
+      }
+      renderAll();
+    }
+
+    function setDiscountLabel(lbl) {
+      state.discountLabel = lbl;
+      document.getElementById('discount-label').value = lbl;
+      renderPreviewOnly();
+    }
+
+    function syncDiscountInputs() {
+      state.discountLabel = document.getElementById('discount-label').value;
+      state.discountValue = parseFloat(document.getElementById('discount-value').value) || 0;
+      state.childDiscountQty = parseInt(document.getElementById('child-discount-qty').value) || 0;
+      renderPreviewOnly();
+    }
+
+    function setNotePreset(type) {
+      if (type === 'visto') {
+        state.note = 'O visto terá validade de 10 anos e dará direito a entrada em outros países como México e Canadá (eTA).';
+      } else if (type === 'eta') {
+        state.note = 'O eTA Canadense terá validade de 5 anos ou até a data do vencimento do passaporte se for menor.';
+      } else {
+        state.note = '';
+      }
+      document.getElementById('budget-note').value = state.note;
+      renderPreviewOnly();
+    }
+
+    function syncStateFromInputs() {
+      state.clientName = document.getElementById('client-name').value;
+      state.title = document.getElementById('budget-title').value;
+      state.note = document.getElementById('budget-note').value;
+      state.validity = document.getElementById('budget-validity').value;
+      state.showInstallments = document.getElementById('opt-show-installments').checked;
+      state.showBreakdown = document.getElementById('opt-show-breakdown').checked;
+      state.showPlanDetails = document.getElementById('opt-show-plan-details').checked;
+      renderPreviewOnly();
+    }
+
+    // =========================================================================
+    // UI RENDERING
+    // =========================================================================
+    function initStaticLists() {
+      // Top 6 quick preset buttons
+      const qContainer = document.getElementById('quick-preset-buttons');
+      qContainer.innerHTML = EXCEL_PRESETS.slice(0, 6).map(p => `
+        <button type="button" onclick="loadPreset('${p.id}')"
+          class="text-left px-3 py-2 rounded-lg border border-[var(--border)] bg-[var(--background)] hover:border-[#D91E36] transition flex items-center justify-between gap-2 group">
+          <div class="truncate">
+            <span class="block text-xs font-bold text-[var(--foreground)] group-hover:text-[#D91E36] truncate">${p.shortTitle}</span>
+            <span class="block text-xs text-[var(--muted-foreground)] truncate">${p.badge}</span>
+          </div>
+          <span class="text-xs font-bold text-[#D91E36] shrink-0">Usar →</span>
+        </button>
+      `).join('');
+
+      // Catalog pills
+      const cContainer = document.getElementById('catalog-pills');
+      cContainer.innerHTML = SERVICE_CATALOG.map(item => `
+        <button type="button" onclick="addCatalogItem('${item.id}')"
+          class="px-2.5 py-1 rounded-lg text-xs font-medium bg-[var(--background)] hover:bg-[#162B4E] hover:text-white text-[var(--foreground)] border border-[var(--border)] transition">
+          + ${item.label.replace('🤝 ', '').replace('🚨 ', '').replace('📮 ', '').replace('📦 ', '').replace('⚡ ', '').replace('🔧 ', '').replace('📝 ', '').replace('🛂 ', '')}
+        </button>
+      `).join('');
+
+      // Full presets grid on Tab 2
+      const grid = document.getElementById('all-presets-grid');
+      grid.innerHTML = EXCEL_PRESETS.map(p => {
+        const sumItems = p.items.reduce((acc, it) => acc + it.qty * it.unitPrice, 0);
+        return `
+          <div class="bg-[var(--background)] border border-[var(--border)] rounded-xl p-4 flex flex-col justify-between hover:border-[#D91E36] transition shadow-sm">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-[#162B4E] text-white">${p.badge}</span>
+                <span class="text-xs font-bold text-[#D91E36]">${p.discountMode !== 'none' ? p.discountLabel : 'Padrão'}</span>
+              </div>
+              <h3 class="text-sm font-bold text-[var(--foreground)] mb-1">${p.shortTitle}</h3>
+              <p class="text-xs text-[var(--muted-foreground)] mb-3">${p.subtitle}</p>
+              <ul class="space-y-1 text-xs text-[var(--muted-foreground)] border-t border-[var(--border)] pt-2 mb-4">
+                ${p.items.map(i => `<li class="truncate">• ${i.qty}x ${i.desc}</li>`).join('')}
+              </ul>
+            </div>
+            <button onclick="loadPreset('${p.id}')" class="w-full py-2 px-3 rounded-lg text-xs font-bold bg-[#D91E36] hover:bg-red-700 text-white transition">
+              Carregar este Modelo no Gerador →
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderBuilderTable() {
+      const tbody = document.getElementById('builder-rows-tbody');
+      tbody.innerHTML = state.items.map((item, idx) => {
+        const sub = (Number(item.qty) || 0) * (Number(item.unitPrice) || 0);
+        return `
+          <tr class="hover:bg-slate-500/5">
+            <td class="py-2 px-2">
+              <input type="text" value="${item.desc.replace(/"/g, '&quot;')}"
+                oninput="updateRowField(${idx}, 'desc', this.value)"
+                class="w-full px-2.5 py-1.5 rounded border border-[var(--border)] bg-[var(--background)] text-xs sm:text-sm text-[var(--foreground)] font-medium" />
+            </td>
+            <td class="py-2 px-1 text-center">
+              <select onchange="updateRowField(${idx}, 'category', this.value)"
+                class="px-1.5 py-1.5 rounded border border-[var(--border)] bg-[var(--background)] text-xs text-[var(--foreground)]">
+                <option value="visto" ${item.category === 'visto' ? 'selected' : ''}>Assessoria Visto</option>
+                <option value="andarela" ${item.category === 'andarela' ? 'selected' : ''}>Outro Serviço</option>
+                <option value="taxa" ${item.category === 'taxa' ? 'selected' : ''}>Taxa Oficial</option>
+                <option value="sedex" ${item.category === 'sedex' ? 'selected' : ''}>Sedex</option>
+              </select>
+            </td>
+            <td class="py-2 px-1 text-center">
+              <input type="number" min="1" max="50" value="${item.qty}"
+                oninput="updateRowField(${idx}, 'qty', this.value); this.parentElement.nextElementSibling.nextElementSibling.textContent = formatBRL((parseFloat(this.value)||0) * state.items[${idx}].unitPrice)"
+                class="w-16 px-2 py-1.5 rounded border border-[var(--border)] bg-[var(--background)] text-center text-xs sm:text-sm font-bold text-[var(--foreground)]" />
+            </td>
+            <td class="py-2 px-1 text-right">
+              <input type="number" step="0.25" value="${item.unitPrice}"
+                oninput="updateRowField(${idx}, 'unitPrice', this.value); this.parentElement.nextElementSibling.textContent = formatBRL(state.items[${idx}].qty * (parseFloat(this.value)||0))"
+                class="w-24 px-2 py-1.5 rounded border border-[var(--border)] bg-[var(--background)] text-right text-xs sm:text-sm font-bold text-[var(--foreground)]" />
+            </td>
+            <td class="py-2 px-3 text-right font-bold text-xs sm:text-sm whitespace-nowrap text-[var(--foreground)]">
+              ${formatBRL(sub)}
+            </td>
+            <td class="py-2 px-2 text-center">
+              <button type="button" onclick="removeRow(${idx})" title="Remover linha"
+                class="text-red-500 hover:bg-red-500/15 p-1.5 rounded-lg transition text-xs font-bold">
+                ✕
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderPreviewOnly() {
+      const calc = calculateTotals();
+      const todayStr = new Date().toLocaleDateString('pt-BR');
+      document.getElementById('preview-date').textContent = `Data: ${todayStr}`;
+      document.getElementById('preview-title').textContent = state.title || 'ORÇAMENTO ANDARELA TUR';
+
+      const clientEl = document.getElementById('preview-client');
+      if (state.clientName && state.clientName.trim() !== '') {
+        clientEl.textContent = `Cliente: ${state.clientName.trim()}`;
+        clientEl.classList.remove('hidden');
+      } else {
+        clientEl.classList.add('hidden');
+      }
+
+      // Preview rows
+      const pTbody = document.getElementById('preview-tbody');
+      pTbody.innerHTML = state.items.map((item, idx) => {
+        const sub = (Number(item.qty) || 0) * (Number(item.unitPrice) || 0);
+        const zebra = idx % 2 === 1 ? 'bg-slate-50/80' : 'bg-white';
+        return `
+          <tr class="${zebra}">
+            <td class="py-2.5 px-3 font-semibold text-slate-800">${item.desc}</td>
+            <td class="py-2.5 px-2 text-center font-bold text-slate-700">${item.qty}</td>
+            <td class="py-2.5 px-3 text-right font-bold text-slate-900 whitespace-nowrap">${formatBRL(sub)}</td>
+          </tr>
+        `;
+      }).join('');
+
+      // Discount buttons active state
+      const modes = [
+        { id: 'disc-btn-none', active: state.discountMode === 'none' },
+        { id: 'disc-btn-pct10', active: state.discountMode === 'pct' && Number(state.discountValue) === 10 },
+        { id: 'disc-btn-pct15', active: state.discountMode === 'pct' && Number(state.discountValue) === 15 },
+        { id: 'disc-btn-table_se', active: state.discountMode === 'table_se' },
+        { id: 'disc-btn-fixed', active: state.discountMode === 'fixed' }
+      ];
+      modes.forEach(m => {
+        const el = document.getElementById(m.id);
+        if (!el) return;
+        if (m.active) {
+          el.className = 'px-2.5 py-2 rounded-lg text-xs font-bold bg-[#162B4E] text-white border border-[#162B4E] shadow-sm transition';
+        } else {
+          el.className = 'px-2.5 py-2 rounded-lg text-xs font-semibold bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)] hover:border-[#162B4E] transition';
+        }
+      });
+
+      // Discount helper text
+      const helper = document.getElementById('discount-helper-text');
+      const valLabel = document.getElementById('discount-val-label');
+      if (state.discountMode === 'none' && calc.childDiscount === 0) {
+        valLabel.textContent = 'Sem desconto ativo';
+        helper.textContent = 'Nenhum desconto aplicado no momento.';
+      } else if (state.discountMode === 'pct') {
+        valLabel.textContent = 'Percentual de Desconto (%)';
+        helper.textContent = `${state.discountValue}% sobre Assessoria (${formatBRL(calc.baseForPct)}) = -${formatBRL(calc.baseDiscount)}`;
+      } else if (state.discountMode === 'table_se') {
+        valLabel.textContent = 'Tabela Progressiva SE (Automático)';
+        helper.textContent = `${calc.totalApplicantsVisto} solicitante(s) = -${formatBRL(calc.baseDiscount)} na tabela`;
+      } else {
+        valLabel.textContent = 'Valor Fixo de Desconto (R$)';
+        helper.textContent = `Desconto direto de -${formatBRL(calc.baseDiscount)}`;
+      }
+
+      // Preview discount row
+      const discRow = document.getElementById('preview-discount-row');
+      if (calc.totalDiscount > 0) {
+        discRow.classList.remove('hidden');
+        let lbl = state.discountLabel || 'Desconto';
+        if (calc.childDiscount > 0 && calc.baseDiscount > 0) {
+          lbl += ` (+ Desc. Criança)`;
+        } else if (calc.childDiscount > 0 && calc.baseDiscount === 0) {
+          lbl = `Desconto Criança (${state.childDiscountQty}x)`;
+        }
+        document.getElementById('preview-discount-label').textContent = lbl;
+        document.getElementById('preview-discount-val').textContent = `- ${formatBRL(calc.totalDiscount)}`;
+      } else {
+        discRow.classList.add('hidden');
+      }
+
+      // Grand Total
+      document.getElementById('preview-total-val').textContent = formatBRL(calc.grandTotal);
+      const perPersonEl = document.getElementById('preview-per-person');
+      if (calc.totalApplicantsVisto > 1) {
+        perPersonEl.textContent = `${formatBRL(calc.grandTotal / calc.totalApplicantsVisto)} / pessoa`;
+      } else {
+        perPersonEl.textContent = '';
+      }
+
+      // Breakdown box
+      const bBox = document.getElementById('preview-breakdown-box');
+      if (state.showBreakdown) {
+        bBox.classList.remove('hidden');
+        document.getElementById('preview-andarela-total').textContent = formatBRL(calc.netAndarela);
+        document.getElementById('preview-taxes-total').textContent = formatBRL(calc.officialTaxesSubtotal);
+      } else {
+        bBox.classList.add('hidden');
+      }
+
+      // Installments box
+      const iBox = document.getElementById('preview-installments-box');
+      if (state.showInstallments && calc.netAndarela > 0) {
+        iBox.classList.remove('hidden');
+        if (calc.maxInstallments > 1) {
+          const parcelVal = calc.netAndarela / calc.maxInstallments;
+          document.getElementById('preview-installment-text').textContent =
+            `Serviços Andarela (${formatBRL(calc.netAndarela)}) em até ${calc.maxInstallments}x de ${formatBRL(parcelVal)} no cartão`;
+        } else {
+          document.getElementById('preview-installment-text').textContent =
+            `Serviços Andarela (${formatBRL(calc.netAndarela)}) à vista ou no cartão (parcelamento a partir de R$ 700)`;
+        }
+      } else {
+        iBox.classList.add('hidden');
+      }
+
+      // Included Plan Features Box
+      const planBox = document.getElementById('preview-plan-box');
+      const hasVisto = state.items.some(i => i.category === 'visto');
+      if (state.showPlanDetails && hasVisto) {
+        planBox.classList.remove('hidden');
+        const allText = state.items.map(i => i.desc.toLowerCase()).join(' ');
+        const features = [
+          'Orientação e acompanhamento do início ao fim + Análise de Perfil',
+          'Cadastro Consular + Guia para pagamento da taxa Consular',
+          'Preenchimento estratégico do formulário oficial DS-160 + Agendamentos',
+          'Acesso total do cliente à conta de agendamento consular'
+        ];
+        if (allText.includes('urgência') || allText.includes('urgencia')) {
+          features.push('⭐ Plano Urgência: Plantão para antecipação de entrevista / entrega na data mais próxima + Orientação por vídeo chamada');
+        } else if (allText.includes('plus') || allText.includes('650') || allText.includes('entrega')) {
+          features.push('⭐ Plano Plus: Entrega de documentos no Consulado (Sem Entrevista) ou Orientação Personalizada por vídeo chamada (Com Entrevista)');
+        }
+        document.getElementById('preview-plan-list').innerHTML = features.map(f => `<li>• ${f}</li>`).join('');
+      } else {
+        planBox.classList.add('hidden');
+      }
+
+      // Note box
+      const noteBox = document.getElementById('preview-note-box');
+      if (state.note && state.note.trim() !== '') {
+        noteBox.classList.remove('hidden');
+        document.getElementById('preview-note-text').textContent = state.note;
+      } else {
+        noteBox.classList.add('hidden');
+      }
+
+      document.getElementById('preview-validity-text').textContent = state.validity || '';
+    }
+
+    function renderAll() {
+      renderBuilderTable();
+      renderPreviewOnly();
+    }
+
+    // =========================================================================
+    // WHATSAPP TEXT GENERATOR
+    // =========================================================================
+    function copyWhatsAppText() {
+      const calc = calculateTotals();
+      const lines = [];
+      lines.push(`✈️ *ANDARELA TUR — VIAGENS E VISTOS*`);
+      lines.push(`📋 *${state.title || 'ORÇAMENTO'}*`);
+      if (state.clientName && state.clientName.trim()) {
+        lines.push(`👤 Cliente: *${state.clientName.trim()}*`);
+      }
+      lines.push(``);
+
+      state.items.forEach(item => {
+        const sub = (Number(item.qty) || 0) * (Number(item.unitPrice) || 0);
+        lines.push(`${item.desc}`);
+        lines.push(`   Qtd: ${item.qty}x  |  Subtotal: *${formatBRL(sub)}*`);
+      });
+
+      if (calc.totalDiscount > 0) {
+        lines.push(``);
+        lines.push(`🏷️ *${state.discountLabel || 'Desconto'}:* - ${formatBRL(calc.totalDiscount)}`);
+      }
+
+      lines.push(`────────────────────────`);
+      lines.push(`💰 *VALOR TOTAL: ${formatBRL(calc.grandTotal)}*`);
+      if (calc.totalApplicantsVisto > 1) {
+        lines.push(`👥 Valor por pessoa: ${formatBRL(calc.grandTotal / calc.totalApplicantsVisto)}`);
+      }
+
+      if (state.showBreakdown) {
+        lines.push(``);
+        lines.push(`🔹 Serviços Andarela Tur: *${formatBRL(calc.netAndarela)}*`);
+        lines.push(`🔹 Taxas Oficiais / Sedex: *${formatBRL(calc.officialTaxesSubtotal)}*`);
+      }
+
+      if (state.showInstallments && calc.maxInstallments > 1) {
+        const pVal = calc.netAndarela / calc.maxInstallments;
+        lines.push(`💳 Parcelamento Assessoria: em até *${calc.maxInstallments}x de ${formatBRL(pVal)}* no cartão de crédito.`);
+      }
+
+      if (state.note && state.note.trim()) {
+        lines.push(``);
+        lines.push(`📌 _${state.note.trim()}_`);
+      }
+
+      const text = lines.join('\n');
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('Orçamento copiado para colar no WhatsApp!', '💬');
+      });
+    }
+
+    // =========================================================================
+    // HIGH-DPI CANVAS DOCUMENT RENDERER (FOR BOTH PDF AND PNG EXPORT)
+    // Zero external dependencies, works 100% offline and inside sandboxed iframes!
+    // =========================================================================
+    function wrapCanvasText(ctx, text, maxWidth) {
+      const words = String(text || '').split(' ');
+      const lines = [];
+      let current = '';
+      for (let i = 0; i < words.length; i++) {
+        const testLine = current ? current + ' ' + words[i] : words[i];
+        if (ctx.measureText(testLine).width > maxWidth && current) {
+          lines.push(current);
+          current = words[i];
+        } else {
+          current = testLine;
+        }
+      }
+      if (current) lines.push(current);
+      return lines.length ? lines : [''];
+    }
+
+    async function renderBudgetToCanvas() {
+      const calc = calculateTotals();
+      const scale = 2.5; // High-DPI crisp output
+      const W = 840;
+
+      // Measure dynamic height first
+      const dummyCanvas = document.createElement('canvas');
+      const dCtx = dummyCanvas.getContext('2d');
+      dCtx.font = '600 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+
+      const rowMeasurements = state.items.map(item => {
+        const lines = wrapCanvasText(dCtx, item.desc, 470);
+        const h = Math.max(46, lines.length * 22 + 22);
+        return { item, lines, h };
+      });
+
+      const rowsTotalH = rowMeasurements.reduce((acc, r) => acc + r.h, 0);
+      let H = 210 + 44 + rowsTotalH + (calc.totalDiscount > 0 ? 46 : 0) + 56 + 30;
+      if (state.showBreakdown) H += 78;
+      if (state.showInstallments && calc.netAndarela > 0) H += 58;
+      const hasVisto = state.items.some(i => i.category === 'visto');
+      if (state.showPlanDetails && hasVisto) H += 165;
+      if (state.note && state.note.trim()) H += 72;
+      H += 65; // Footer
+
+      const canvas = document.createElement('canvas');
+      canvas.width = W * scale;
+      canvas.height = H * scale;
+      const ctx = canvas.getContext('2d');
+      ctx.scale(scale, scale);
+
+      // Background
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, W, H);
+
+      // 1. Navy Header Banner (#162B4E)
+      ctx.fillStyle = '#162B4E';
+      ctx.fillRect(0, 0, W, 165);
+
+      // White Logo Card
+      ctx.fillStyle = '#FFFFFF';
+      ctx.beginPath();
+      ctx.roundRect(36, 24, 220, 68, 12);
+      ctx.fill();
+
+      const logoImg = document.getElementById('brand-logo-red');
+      if (logoImg && logoImg.complete && logoImg.naturalWidth > 0) {
+        const ratio = logoImg.naturalWidth / logoImg.naturalHeight;
+        const drawH = 50;
+        const drawW = drawH * ratio;
+        ctx.drawImage(logoImg, 36 + (220 - drawW) / 2, 24 + (68 - drawH) / 2, drawW, drawH);
+      }
+
+      // Badge & Date on Right
+      ctx.fillStyle = '#C8321E';
+      ctx.beginPath();
+      ctx.roundRect(W - 196, 28, 160, 26, 6);
+      ctx.fill();
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = 'bold 11px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('PROPOSTA OFICIAL', W - 116, 45);
+
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#CBD5E1';
+      ctx.font = '500 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+      ctx.fillText('Data: ' + new Date().toLocaleDateString('pt-BR'), W - 36, 76);
+
+      // Divider in Header
+      ctx.strokeStyle = 'rgba(255,255,255,0.18)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(36, 108);
+      ctx.lineTo(W - 36, 108);
+      ctx.stroke();
+
+      // Budget Title & Client Name
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = '800 20px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+      ctx.fillText((state.title || 'ORÇAMENTO ANDARELA TUR').toUpperCase(), 36, 140);
+
+      if (state.clientName && state.clientName.trim()) {
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#FCD34D';
+        ctx.font = 'bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.fillText('Cliente: ' + state.clientName.trim(), W - 36, 140);
+      }
+
+      // 2. Red Subbanner (#C8321E)
+      ctx.fillStyle = '#C8321E';
+      ctx.fillRect(0, 165, W, 36);
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = 'bold 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText('DESCRIÇÃO DOS SERVIÇOS E TAXAS OFICIAIS', 36, 188);
+      ctx.textAlign = 'right';
+      ctx.fillText('VALORES EM REAIS (R$)', W - 36, 188);
+
+      let y = 224;
+
+      // 3. Table Header
+      ctx.fillStyle = '#F1F5F9';
+      ctx.fillRect(36, y, W - 72, 40);
+      ctx.strokeStyle = '#CBD5E1';
+      ctx.strokeRect(36, y, W - 72, 40);
+
+      ctx.fillStyle = '#334155';
+      ctx.font = 'bold 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText('VALORES / SERVIÇOS', 52, y + 25);
+      ctx.textAlign = 'center';
+      ctx.fillText('QTD.', W - 210, y + 25);
+      ctx.textAlign = 'right';
+      ctx.fillText('VALOR TOTAL', W - 52, y + 25);
+      y += 40;
+
+      // 4. Table Rows
+      rowMeasurements.forEach((rm, idx) => {
+        ctx.fillStyle = idx % 2 === 1 ? '#F8FAFC' : '#FFFFFF';
+        ctx.fillRect(36, y, W - 72, rm.h);
+        ctx.strokeStyle = '#E2E8F0';
+        ctx.strokeRect(36, y, W - 72, rm.h);
+
+        ctx.fillStyle = '#1E293B';
+        ctx.font = '600 14.5px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.textAlign = 'left';
+        rm.lines.forEach((ln, lIdx) => {
+          ctx.fillText(ln, 52, y + 26 + lIdx * 21);
+        });
+
+        ctx.textAlign = 'center';
+        ctx.font = 'bold 15px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.fillStyle = '#334155';
+        ctx.fillText(String(rm.item.qty), W - 210, y + rm.h / 2 + 5);
+
+        const sub = (Number(rm.item.qty) || 0) * (Number(rm.item.unitPrice) || 0);
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#0F172A';
+        ctx.fillText(formatBRL(sub), W - 52, y + rm.h / 2 + 5);
+
+        y += rm.h;
+      });
+
+      // 5. Discount Row (if active)
+      if (calc.totalDiscount > 0) {
+        ctx.fillStyle = '#ECFDF5';
+        ctx.fillRect(36, y, W - 72, 44);
+        ctx.strokeStyle = '#A7F3D0';
+        ctx.strokeRect(36, y, W - 72, 44);
+
+        ctx.fillStyle = '#065F46';
+        ctx.font = 'bold 14.5px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.textAlign = 'left';
+        let lbl = state.discountLabel || 'Desconto';
+        if (calc.childDiscount > 0 && calc.baseDiscount > 0) lbl += ' (+ Desc. Criança)';
+        ctx.fillText('🏷️ ' + lbl, 52, y + 27);
+
+        ctx.textAlign = 'right';
+        ctx.fillText('- ' + formatBRL(calc.totalDiscount), W - 52, y + 27);
+        y += 44;
+      }
+
+      // 6. Total Row
+      ctx.fillStyle = '#162B4E';
+      ctx.fillRect(36, y, W - 72, 52);
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = '800 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText('VALOR TOTAL DO ORÇAMENTO', 52, y + 32);
+
+      ctx.fillStyle = '#FCD34D';
+      ctx.font = '800 20px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(formatBRL(calc.grandTotal), W - 52, y + 33);
+      y += 68;
+
+      // 7. Breakdown Cards (Andarela vs Taxes)
+      if (state.showBreakdown) {
+        const cardW = (W - 72 - 16) / 2;
+        ctx.fillStyle = '#F8FAFC';
+        ctx.strokeStyle = '#CBD5E1';
+        ctx.beginPath();
+        ctx.roundRect(36, y, cardW, 62, 10);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.roundRect(36 + cardW + 16, y, cardW, 62, 10);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#64748B';
+        ctx.font = 'bold 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.fillText('🤝 SERVIÇOS ANDARELA TUR (LÍQUIDO)', 52, y + 23);
+        ctx.fillStyle = '#162B4E';
+        ctx.font = '800 18px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.fillText(formatBRL(calc.netAndarela), 52, y + 48);
+
+        ctx.fillStyle = '#64748B';
+        ctx.font = 'bold 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.fillText('🚨 TAXAS OFICIAIS / SEDEX', 52 + cardW + 16, y + 23);
+        ctx.fillStyle = '#334155';
+        ctx.font = '800 18px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.fillText(formatBRL(calc.officialTaxesSubtotal), 52 + cardW + 16, y + 48);
+
+        y += 76;
+      }
+
+      // 8. Installments Box
+      if (state.showInstallments && calc.netAndarela > 0) {
+        ctx.fillStyle = '#EFF6FF';
+        ctx.strokeStyle = '#BFDBFE';
+        ctx.beginPath();
+        ctx.roundRect(36, y, W - 72, 44, 10);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#162B4E';
+        ctx.font = 'bold 13.5px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        let instText = '';
+        if (calc.maxInstallments > 1) {
+          const pVal = calc.netAndarela / calc.maxInstallments;
+          instText = `💳 Parcelamento Serviços Andarela: até ${calc.maxInstallments}x de ${formatBRL(pVal)} no cartão de crédito`;
+        } else {
+          instText = `💳 Serviços Andarela (${formatBRL(calc.netAndarela)}): pagamento à vista ou no cartão`;
+        }
+        ctx.fillText(instText, 52, y + 27);
+
+        if (calc.totalApplicantsVisto > 1) {
+          ctx.textAlign = 'right';
+          ctx.fillStyle = '#C8321E';
+          ctx.font = 'bold 13.5px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+          ctx.fillText(`${formatBRL(calc.grandTotal / calc.totalApplicantsVisto)} / pessoa`, W - 52, y + 27);
+        }
+        y += 58;
+      }
+
+      // 9. Plan Features Box
+      if (state.showPlanDetails && hasVisto) {
+        ctx.fillStyle = '#F8FAFC';
+        ctx.strokeStyle = '#E2E8F0';
+        ctx.beginPath();
+        ctx.roundRect(36, y, W - 72, 148, 10);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#162B4E';
+        ctx.font = 'bold 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.fillText('✅ O QUE ESTÁ INCLUSO NA ASSESSORIA ANDARELA TUR:', 52, y + 25);
+
+        const allText = state.items.map(i => i.desc.toLowerCase()).join(' ');
+        const itemsList = [
+          '• Orientação e acompanhamento do início ao fim + Análise de Perfil detalhada',
+          '• Cadastro Consular + Guia para pagamento da taxa Consular + Agendamentos',
+          '• Preenchimento estratégico do formulário oficial DS-160',
+          '• Acesso transparente do cliente à conta de agendamento consular'
+        ];
+        if (allText.includes('urgência') || allText.includes('urgencia')) {
+          itemsList.push('• Plano Urgência: Plantão de antecipação / entrega na data mais próxima + Vídeo chamada');
+        } else if (allText.includes('plus') || allText.includes('650') || allText.includes('entrega')) {
+          itemsList.push('• Plano Plus: Entrega de documentos no Consulado (SE) ou Orientação por vídeo chamada (CE)');
+        }
+
+        ctx.fillStyle = '#475569';
+        ctx.font = '500 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        itemsList.forEach((line, idx) => {
+          ctx.fillText(line, 56, y + 50 + idx * 21);
+        });
+        y += 162;
+      }
+
+      // 10. Note Box
+      if (state.note && state.note.trim()) {
+        ctx.fillStyle = '#FFFBEB';
+        ctx.strokeStyle = '#FDE68A';
+        ctx.beginPath();
+        ctx.roundRect(36, y, W - 72, 54, 10);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#92400E';
+        ctx.font = '600 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        const nLines = wrapCanvasText(ctx, '📌 ' + state.note.trim(), W - 104);
+        nLines.slice(0, 2).forEach((ln, idx) => {
+          ctx.fillText(ln, 52, y + 24 + idx * 20);
+        });
+        y += 68;
+      }
+
+      // 11. Footer
+      ctx.strokeStyle = '#E2E8F0';
+      ctx.beginPath();
+      ctx.moveTo(36, H - 44);
+      ctx.lineTo(W - 36, H - 44);
+      ctx.stroke();
+
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#64748B';
+      ctx.font = '500 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+      ctx.fillText(state.validity || '', 36, H - 20);
+
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#162B4E';
+      ctx.font = 'bold 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+      ctx.fillText('Andarela Tur • Viagens e Vistos', W - 36, H - 20);
+
+      return canvas;
+    }
+
+    // Convert Canvas JPEG DataURL directly into a valid binary PDF-1.4 Blob
+    function canvasToPDFBlob(canvas) {
+      const jpegDataUrl = canvas.toDataURL('image/jpeg', 0.95);
+      const base64 = jpegDataUrl.split(',')[1];
+      const binaryImg = atob(base64);
+      const imgLen = binaryImg.length;
+
+      const wPt = 595.28; // A4 width in points
+      const hPt = Math.round((canvas.height / canvas.width) * wPt * 100) / 100;
+
+      const chunks = [];
+      let offset = 0;
+      const offsets = [];
+
+      function pushStr(str) {
+        chunks.push(str);
+        offset += str.length;
+      }
+
+      pushStr('%PDF-1.4\n%\xFF\xFF\xFF\xFF\n');
+
+      // 1: Catalog
+      offsets[1] = offset;
+      pushStr('1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n');
+
+      // 2: Pages
+      offsets[2] = offset;
+      pushStr('2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n');
+
+      // 3: Page
+      offsets[3] = offset;
+      pushStr(`3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${wPt} ${hPt}] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>\nendobj\n`);
+
+      // 4: Image XObject
+      offsets[4] = offset;
+      pushStr(`4 0 obj\n<< /Type /XObject /Subtype /Image /Width ${canvas.width} /Height ${canvas.height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${imgLen} >>\nstream\n`);
+      pushStr(binaryImg);
+      pushStr('\nendstream\nendobj\n');
+
+      // 5: Content Stream
+      const contentStream = `q ${wPt} 0 0 ${hPt} 0 0 cm /Im0 Do Q`;
+      offsets[5] = offset;
+      pushStr(`5 0 obj\n<< /Length ${contentStream.length} >>\nstream\n${contentStream}\nendstream\nendobj\n`);
+
+      const xrefOffset = offset;
+      pushStr('xref\n0 6\n0000000000 65535 f \n');
+      for (let i = 1; i <= 5; i++) {
+        pushStr(String(offsets[i]).padStart(10, '0') + ' 00000 n \n');
+      }
+      pushStr(`trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n${xrefOffset}\n%%EOF`);
+
+      // Convert string chunks into Uint8Array
+      const totalBytes = offset;
+      const bytes = new Uint8Array(totalBytes);
+      let pos = 0;
+      for (const chunk of chunks) {
+        for (let i = 0; i < chunk.length; i++) {
+          bytes[pos++] = chunk.charCodeAt(i) & 0xff;
+        }
+      }
+      return new Blob([bytes], { type: 'application/pdf' });
+    }
+
+    function getCleanFileName(ext) {
+      const base = (state.clientName || state.title || 'Orcamento_Andarela_Tur')
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-zA-Z0-9]+/g, '_')
+        .replace(/^_+|_+$/g, '');
+      return `Andarela_Tur_${base}.${ext}`;
+    }
+
+
+    async function shareOrDownloadFile(blob, filename, mimeType, successMsg) {
+      // On mobile (iPhone / Android), offer native share sheet to send straight to WhatsApp if desired
+      const file = new File([blob], filename, { type: mimeType });
+      if (window.__useMobileShare && navigator.canShare && navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share({
+            files: [file],
+            title: state.title || 'Orçamento Andarela Tur',
+            text: 'Segue o orçamento da Andarela Tur — Viagens e Vistos.'
+          });
+          showToast('Enviado para o compartilhamento do celular!', '📲');
+          window.__useMobileShare = false;
+          return;
+        } catch (err) {
+          window.__useMobileShare = false;
+          if (err && err.name === 'AbortError') return;
+        }
+      }
+      window.__useMobileShare = false;
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 5000);
+      showToast(successMsg, '📄');
+    }
+
+    async function sharePDFOnMobile() {
+      window.__useMobileShare = true;
+      await downloadBudgetPDF();
+    }
+
+    async function downloadBudgetPDF() {
+      showToast('Gerando PDF em alta resolução...', '⏳');
+      const canvas = await renderBudgetToCanvas();
+      const pdfBlob = canvasToPDFBlob(canvas);
+      await shareOrDownloadFile(pdfBlob, getCleanFileName('pdf'), 'application/pdf', 'PDF Oficial gerado e baixado com sucesso!');
+    }
+
+    async function downloadBudgetPNG() {
+      showToast('Gerando imagem PNG para WhatsApp...', '⏳');
+      const canvas = await renderBudgetToCanvas();
+      canvas.toBlob(blob => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = getCleanFileName('png');
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 5000);
+        showToast('Imagem PNG baixada! Pronta para enviar no WhatsApp.', '🖼️');
+      }, 'image/png');
+    }
+
+        if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+    // Initialize on load
+    window.addEventListener('DOMContentLoaded', () => {
+      initStaticLists();
+      renderAll();
+    });
+  </script>
+</body>
+</html>
